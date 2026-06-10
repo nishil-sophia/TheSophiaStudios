@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Work — The Sophia Studios</title>
+  <meta name="description" content="The full portfolio of Juliana Sophia — Paris Series, Life Stages abstract collection, and Interiors. Available as prints and originals."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .work-filters { display:flex; flex-wrap:wrap; gap:10px; margin:52px 0 48px; }
+    .wf-btn { padding:9px 22px; border:1.5px solid rgba(44,37,34,0.18); border-radius:20px; background:transparent; font-family:var(--sans); font-size:0.77rem; font-weight:500; letter-spacing:0.05em; color:var(--charcoal-lt); cursor:pointer; transition:all var(--transition); }
+    .wf-btn:hover,.wf-btn.active { background:var(--charcoal); color:var(--cream); border-color:var(--charcoal); }
+    .portfolio-masonry { columns:3; column-gap:18px; }
+    .p-card { break-inside:avoid; margin-bottom:18px; position:relative; overflow:hidden; border-radius:var(--radius); cursor:pointer; display:block; }
+    .p-card svg { width:100%; display:block; transition:transform 0.7s ease; }
+    .p-card:hover svg { transform:scale(1.04); }
+    .p-card-info { position:absolute; inset:0; background:linear-gradient(to top,rgba(44,37,34,0.88) 0%,transparent 55%); opacity:0; transition:opacity var(--transition); display:flex; flex-direction:column; justify-content:flex-end; padding:24px; }
+    .p-card:hover .p-card-info { opacity:1; }
+    .p-card-info h4 { font-family:var(--serif); font-size:1.05rem; color:var(--cream); margin-bottom:4px; }
+    .p-card-info .meta { font-size:0.72rem; color:rgba(248,244,237,0.72); }
+    .p-card-info .price { font-size:0.82rem; font-weight:600; color:var(--terra-light); margin-top:8px; }
+    .p-tag { position:absolute; top:12px; right:12px; padding:4px 12px; border-radius:20px; font-size:0.62rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; }
+    .series-intro { background:var(--charcoal); border-radius:var(--radius); padding:56px 64px; margin:72px 0 48px; position:relative; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .series-intro::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 50%, rgba(91,140,140,0.18) 0%, transparent 60%); }
+    .series-intro .eyebrow { color:var(--terra); position:relative; }
+    .series-intro h2 { font-size:clamp(1.8rem,3vw,2.6rem); color:var(--cream); margin-bottom:14px; position:relative; }
+    .series-intro p { font-size:0.92rem; color:rgba(248,244,237,0.58); line-height:1.82; position:relative; }
+    .series-intro-right { position:relative; }
+    .vr-embed { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius); height:260px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; cursor:pointer; transition:background var(--transition); }
+    .vr-embed:hover { background:rgba(255,255,255,0.07); }
+    .vr-play { width:64px; height:64px; background:var(--cream); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.6rem; transition:transform var(--transition); }
+    .vr-embed:hover .vr-play { transform:scale(1.1); }
+    .vr-embed p { color:rgba(248,244,237,0.55); font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; }
+    @media(max-width:900px){.portfolio-masonry{columns:2;}.series-intro{grid-template-columns:1fr;gap:32px;}}
+    @media(max-width:540px){.portfolio-masonry{columns:1;}}
+  </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">The Sophia <em>Studios</em></a>
+    <ul class="nav-links">
+      <li><a href="work.html" class="active">The Work</a></li>
+      <li><a href="index.html#hybrid">The Experience</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="work.html">The Work</a><a href="index.html#hybrid">The Experience</a><a href="shop.html">Shop</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a>
+</div>
+
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow">Portfolio</span>
+    <h1>The Work</h1>
+    <p>Mixed-media paintings and abstract works spanning global travels, quiet interiors, and the emotional landscape of a life in motion.</p>
+  </div>
+</div>
+
+<div class="container section-pad">
+  <div class="work-filters reveal">
+    <button class="wf-btn active">All Works</button>
+    <button class="wf-btn">Paris &amp; Beyond</button>
+    <button class="wf-btn">Life Stages (Abstract)</button>
+    <button class="wf-btn">Interiors</button>
+    <button class="wf-btn">Originals Only</button>
+    <button class="wf-btn">2024</button>
+    <button class="wf-btn">2023</button>
+  </div>
+
+  <!-- Virtual Gallery CTA -->
+  <div class="series-intro reveal">
+    <div>
+      <span class="eyebrow">Current Exhibition</span>
+      <h2>Paris &amp; Beyond</h2>
+      <p>The debut Sophia Studios exhibition. Mixed-media and abstract works drawn from Juliana's time in France — familiar landmarks alongside abstract expressions of memory, movement, and belonging.</p>
+      <br/>
+      <a href="shop.html" class="btn btn-cream" style="margin-top:8px;">Collect These Works →</a>
+    </div>
+    <div class="series-intro-right">
+      <div class="vr-embed">
+        <div class="vr-play">▶</div>
+        <p>Enter Virtual Gallery ↗</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Masonry grid -->
+  <div class="portfolio-masonry reveal">
+    <div class="p-card">
+      <svg viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="520" fill="#d4938a"/><rect x="210" width="190" height="520" fill="#6badb8"/>
+        <rect x="224" y="25" width="162" height="310" fill="#7abcc5"/><rect x="224" y="25" width="162" height="310" fill="rgba(60,110,55,0.28)"/>
+        <line x1="305" y1="25" x2="305" y2="335" stroke="rgba(255,255,255,0.38)" stroke-width="5"/><line x1="224" y1="180" x2="386" y2="180" stroke="rgba(255,255,255,0.38)" stroke-width="5"/>
+        <rect y="380" width="400" height="140" fill="#9a7055"/>
+        <ellipse cx="230" cy="408" rx="88" ry="55" fill="#ece7e0"/><circle cx="230" cy="352" r="48" fill="#e0dbd4"/>
+        <ellipse cx="214" cy="345" rx="16" ry="20" fill="#b0a8a0"/><ellipse cx="246" cy="345" rx="16" ry="20" fill="#b0a8a0"/>
+        <ellipse cx="214" cy="347" rx="8.5" ry="10" fill="#4a7a6a"/><ellipse cx="246" cy="347" rx="8.5" ry="10" fill="#4a7a6a"/>
+        <circle cx="214" cy="347" r="4.5" fill="#1a1a1a"/><circle cx="246" cy="347" r="4.5" fill="#1a1a1a"/>
+      </svg>
+      <div class="p-card-info"><h4>Le Chat de la Porte Bleue</h4><p class="meta">Mixed media · Paris Series · 2024</p><p class="price">From $150 print · $2,400 original</p></div>
+      <span class="p-tag" style="background:var(--teal);color:var(--cream);">Fan Favourite</span>
+    </div>
+
+    <div class="p-card">
+      <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="360" fill="#6fa89a"/><rect width="400" height="162" fill="#c5dde0"/>
+        <ellipse cx="100" cy="140" rx="68" ry="38" fill="#3a6b31"/><ellipse cx="270" cy="132" rx="78" ry="42" fill="#2d5a27"/>
+        <rect y="178" width="400" height="182" fill="#6fa89a"/>
+        <ellipse cx="128" cy="288" rx="26" ry="6.5" fill="#b89060"/><rect x="120" y="232" width="4" height="54" fill="#6a5040"/>
+        <polygon points="122,235 122,284 150,260" fill="#2a2520"/>
+        <ellipse cx="218" cy="282" rx="24" ry="6" fill="#b89060"/><rect x="210" y="238" width="4" height="42" fill="#6a5040"/>
+        <polygon points="212,241 212,278 239,260" fill="#2a2520"/>
+      </svg>
+      <div class="p-card-info"><h4>Deux Voiles, Saint-Martin</h4><p class="meta">Oil on paper · Paris Series · 2024</p><p class="price">From $120 print · $1,800 original</p></div>
+      <span class="p-tag" style="background:var(--teal);color:var(--cream);">New</span>
+    </div>
+
+    <div class="p-card">
+      <svg viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="480" fill="#e8d5c0"/>
+        <rect x="0" y="0" width="200" height="240" fill="rgba(91,140,140,0.22)"/><rect x="200" y="240" width="200" height="240" fill="rgba(193,122,93,0.2)"/>
+        <ellipse cx="200" cy="240" rx="150" ry="150" fill="rgba(91,140,140,0.15)"/>
+        <path d="M30 225 Q110 170 200 225 Q290 280 370 230" stroke="#2C2522" stroke-width="3" fill="none" opacity="0.28"/>
+        <path d="M15 370 Q100 320 200 370 Q300 420 385 382" stroke="#5B8C8C" stroke-width="4" fill="none" opacity="0.4"/>
+        <circle cx="110" cy="130" r="45" fill="rgba(91,140,140,0.25)"/><circle cx="295" cy="348" r="48" fill="rgba(193,122,93,0.2)"/>
+        <path d="M40,80 Q100,58 160,88 T280,78 T360,96" stroke="#C17A5D" stroke-width="2.5" fill="none" opacity="0.36"/>
+      </svg>
+      <div class="p-card-info"><h4>Life Stages I — Becoming</h4><p class="meta">Abstract · Mixed media · 2024</p><p class="price">From $185 print · $3,800 original</p></div>
+      <span class="p-tag" style="background:var(--charcoal);color:var(--cream);">Abstract</span>
+    </div>
+
+    <div class="p-card">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="400" fill="#4a8a5a"/><rect width="400" height="130" fill="#b8d8e5"/>
+        <polygon points="192,0 172,400 228,400 208,0" fill="#9a7860" opacity="0.8"/>
+        <rect x="173" y="60" width="58" height="8" fill="#8a6850" opacity="0.85"/><rect x="170" y="112" width="62" height="8" fill="#8a6850" opacity="0.82"/>
+        <ellipse cx="70" cy="285" rx="100" ry="130" fill="#2a6030"/><ellipse cx="340" cy="278" rx="105" ry="134" fill="#2a6030"/>
+        <circle cx="305" cy="290" r="8" fill="#c84040"/><circle cx="325" cy="306" r="7" fill="#b83030"/><circle cx="287" cy="302" r="7" fill="#d04848"/>
+        <polygon points="150,400 248,400 232,200 168,200" fill="#d4b870" opacity="0.6"/>
+        <ellipse cx="196" cy="346" rx="26" ry="15" fill="#1a1a1a"/><circle cx="199" cy="327" r="14" fill="#1a1a1a"/><circle cx="208" cy="321" r="9" fill="#1a1a1a"/>
+      </svg>
+      <div class="p-card-info"><h4>Champ de Mars, Morning</h4><p class="meta">Oil on canvas · Paris Series · 2024</p><p class="price">From $140 print · $3,200 original</p></div>
+      <span class="p-tag" style="background:var(--terra);color:var(--cream);">Bid</span>
+    </div>
+
+    <div class="p-card">
+      <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="320" fill="#ddd0bc"/>
+        <rect x="0" y="0" width="400" height="160" fill="rgba(91,140,140,0.18)"/><rect x="0" y="160" width="400" height="160" fill="rgba(193,122,93,0.15)"/>
+        <path d="M0 160 Q100 130 200 160 Q300 190 400 160" stroke="rgba(44,37,34,0.25)" stroke-width="2.5" fill="rgba(44,37,34,0.04)"/>
+        <circle cx="130" cy="98" r="56" fill="rgba(248,244,237,0.32)" stroke="rgba(91,140,140,0.36)" stroke-width="2"/>
+        <circle cx="275" cy="242" r="52" fill="rgba(44,37,34,0.06)" stroke="rgba(193,122,93,0.3)" stroke-width="2"/>
+        <path d="M0,72 Q60,52 120,80 T240,72 T360,95" stroke="#5B8C8C" stroke-width="3.5" fill="none" opacity="0.45"/>
+        <path d="M0,248 Q80,228 160,256 T320,240 T400,255" stroke="#C17A5D" stroke-width="3" fill="none" opacity="0.42"/>
+      </svg>
+      <div class="p-card-info"><h4>Life Stages II — In Between</h4><p class="meta">Abstract · Acrylic · 2023</p><p class="price">From $165 print · $2,900 original</p></div>
+      <span class="p-tag" style="background:var(--charcoal);color:var(--cream);">Abstract</span>
+    </div>
+
+    <div class="p-card">
+      <svg viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="440" fill="#f0e8da"/>
+        <rect x="260" y="0" width="140" height="320" fill="rgba(255,225,150,0.32)"/>
+        <line x1="330" y1="0" x2="330" y2="320" stroke="rgba(200,175,130,0.4)" stroke-width="4"/>
+        <rect x="0" y="320" width="400" height="120" fill="#c8b898"/>
+        <rect x="30" y="320" width="340" height="12" fill="#8a6a48"/>
+        <rect x="138" y="162" width="72" height="115" rx="36" fill="#5B8C8C"/>
+        <ellipse cx="174" cy="164" rx="36" ry="10" fill="#6a9d9d"/>
+        <circle cx="146" cy="132" r="18" fill="#C17A5D"/><circle cx="173" cy="116" r="20" fill="#d4885a"/>
+        <circle cx="200" cy="126" r="17" fill="#C17A5D"/><circle cx="156" cy="104" r="14" fill="#b86a4a"/>
+        <rect x="56" y="292" width="65" height="30" rx="2" fill="#6a5a90" transform="rotate(-3 56 292)"/>
+      </svg>
+      <div class="p-card-info"><h4>Still Life with Teal Vase</h4><p class="meta">Oil on canvas · Interiors · 2023</p><p class="price">From $95 print · $1,400 original</p></div>
+    </div>
+
+    <div class="p-card">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="400" fill="#e0d8cc"/>
+        <polygon points="0,400 200,0 400,400" fill="rgba(91,140,140,0.18)"/>
+        <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(193,122,93,0.28)" stroke-width="3"/>
+        <circle cx="200" cy="200" r="78" fill="none" stroke="rgba(44,37,34,0.1)" stroke-width="2"/>
+        <circle cx="200" cy="200" r="38" fill="rgba(91,140,140,0.15)"/>
+        <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(44,37,34,0.1)" stroke-width="1.5"/>
+        <line x1="200" y1="0" x2="200" y2="400" stroke="rgba(44,37,34,0.1)" stroke-width="1.5"/>
+        <path d="M60,335 Q130,285 200,315 Q270,345 340,285" stroke="#5B8C8C" stroke-width="4" fill="none" opacity="0.48"/>
+        <rect x="182" y="80" width="36" height="240" rx="18" fill="rgba(193,122,93,0.16)"/>
+      </svg>
+      <div class="p-card-info"><h4>Life Stages III — Arrival</h4><p class="meta">Abstract · Mixed media · 2024</p><p class="price">From $175 print · $3,200 original</p></div>
+      <span class="p-tag" style="background:var(--charcoal);color:var(--cream);">Abstract</span>
+    </div>
+
+    <div class="p-card">
+      <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="360" fill="#b8d5d0"/><rect width="400" height="172" fill="#d0e8ec"/>
+        <rect y="158" width="400" height="202" fill="#88bab4"/>
+        <rect y="148" width="400" height="24" fill="#c0aa80"/>
+        <ellipse cx="80" cy="140" rx="62" ry="34" fill="#2d5a27"/><ellipse cx="220" cy="132" rx="70" ry="38" fill="#357030"/>
+        <ellipse cx="350" cy="138" rx="56" ry="32" fill="#2d5a27"/>
+        <rect x="172" y="64" width="3" height="76" fill="#6a5040"/>
+        <rect x="174" y="64" width="12" height="25" fill="#002395"/><rect x="186" y="64" width="12" height="25" fill="#EEE"/><rect x="198" y="64" width="12" height="25" fill="#ED2939"/>
+        <ellipse cx="115" cy="285" rx="23" ry="6" fill="#c0a060"/>
+        <rect x="108" y="238" width="4" height="46" fill="#6a5040"/>
+        <polygon points="110,241 110,281 134,262" fill="#2a2520"/>
+        <ellipse cx="200" cy="279" rx="21" ry="5.5" fill="#c0a060"/>
+        <rect x="193" y="246" width="4" height="32" fill="#6a5040"/>
+        <polygon points="195,249 195,275 218,262" fill="#2a2520"/>
+        <ellipse cx="282" cy="292" rx="25" ry="6" fill="#c0a060"/>
+        <rect x="274" y="238" width="4" height="52" fill="#6a5040"/>
+        <polygon points="276,241 276,288 302,265" fill="#2a2520"/>
+      </svg>
+      <div class="p-card-info"><h4>Trois Voiles, Île de Ré</h4><p class="meta">Oil on paper · Paris Series · 2024</p><p class="price">From $130 print · $2,600 original</p></div>
+      <span class="p-tag" style="background:var(--terra);color:var(--cream);">Bid</span>
+    </div>
+
+    <div class="p-card">
+      <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="420" fill="#e8dcc8"/>
+        <rect x="40" y="18" width="320" height="278" fill="rgba(200,220,230,0.48)"/>
+        <rect x="40" y="18" width="320" height="278" fill="rgba(255,230,160,0.22)"/>
+        <line x1="200" y1="18" x2="200" y2="296" stroke="rgba(160,140,100,0.48)" stroke-width="5"/>
+        <line x1="40" y1="157" x2="360" y2="157" stroke="rgba(160,140,100,0.48)" stroke-width="5"/>
+        <rect x="35" y="14" width="330" height="9" fill="#8a6a48"/>
+        <rect x="35" y="292" width="330" height="9" fill="#8a6a48"/>
+        <rect x="35" y="14" width="9" height="286" fill="#8a6a48"/>
+        <rect x="356" y="14" width="9" height="286" fill="#8a6a48"/>
+        <rect x="0" y="318" width="400" height="102" fill="#c8b898"/>
+        <rect x="130" y="292" width="140" height="30" fill="#8a6a48"/>
+        <rect x="290" y="298" width="36" height="22" rx="4" fill="#e8e0d8"/>
+        <ellipse cx="308" cy="298" rx="18" ry="5.5" fill="#d8d0c8"/>
+        <ellipse cx="100" cy="116" rx="52" ry="60" fill="rgba(50,120,40,0.26)"/>
+        <ellipse cx="275" cy="96" rx="56" ry="66" fill="rgba(40,110,35,0.2)"/>
+      </svg>
+      <div class="p-card-info"><h4>Morning Window, NYC</h4><p class="meta">Oil on canvas · Interiors · 2023</p><p class="price">From $110 print · $1,900 original</p></div>
+      <span class="p-tag" style="background:var(--terra);color:var(--cream);">Bid</span>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="footer-brand-logo">The Sophia <em>Studios</em></div><p>Mixed-media and abstract paintings rooted in a life of global travel — exhibited live in New York City and virtually, everywhere else.</p><p class="sub">Live Exhibitions: New York City · Virtual Gallery: Worldwide</p><div class="footer-social"><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">◈</a></div></div>
+    <div class="footer-col"><h5>Explore</h5><ul><li><a href="work.html">The Work</a></li><li><a href="index.html#hybrid">The Experience</a></li><li><a href="shop.html">Shop</a></li><li><a href="journal.html">Journal</a></li></ul></div>
+    <div class="footer-col"><h5>Collect</h5><ul><li><a href="shop.html">Giclée Prints</a></li><li><a href="shop.html">Originals</a></li><li><a href="#">Bidding Guide</a></li><li><a href="#">Shipping &amp; Returns</a></li></ul></div>
+    <div class="footer-newsletter"><h5>Stay in the Studio</h5><p>Receive early access to new releases and exhibition invitations.</p><div class="nl-form"><input type="email" class="nl-input" placeholder="your@email.com"/><button class="nl-btn">Subscribe</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2024 The Sophia Studios. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Shipping</a></div></div>
+</div></footer>
+<script>
+  document.getElementById('nav').classList.add('scrolled');
+  const h=document.getElementById('hamburger'),m=document.getElementById('nav-mobile');
+  h.addEventListener('click',()=>{h.classList.toggle('open');m.classList.toggle('open');});
+  document.querySelectorAll('.wf-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.wf-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');}));
+  const ro=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*55);ro.unobserve(en.target);}});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body></html>

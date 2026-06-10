@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — The Sophia Studios</title>
+  <meta name="description" content="Get in touch with The Sophia Studios. Commissions, exhibition inquiries, press, and collector questions — we'd love to hear from you."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .contact-layout { display:grid; grid-template-columns:1fr 1.2fr; gap:100px; padding:88px 0 110px; align-items:start; }
+    .contact-info h2 { font-size:clamp(2rem,3.5vw,3rem); margin-bottom:14px; }
+    .contact-info h2 em { color:var(--teal); font-style:italic; }
+    .contact-info .lead { font-size:1rem; color:var(--charcoal-lt); line-height:1.82; margin-bottom:52px; max-width:420px; }
+    .contact-block { margin-bottom:32px; }
+    .contact-block-label { font-size:0.68rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--charcoal-xs); margin-bottom:8px; }
+    .contact-block-value { font-size:0.96rem; color:var(--charcoal-lt); }
+    .contact-block-value a { color:var(--teal); transition:color var(--transition); }
+    .contact-block-value a:hover { color:var(--teal-dark); }
+    .contact-divider { height:1px; background:rgba(44,37,34,0.08); margin:40px 0; }
+    .social-row { display:flex; gap:12px; margin-top:32px; }
+    .social-pill { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border:1.5px solid rgba(44,37,34,0.15); border-radius:20px; font-size:0.78rem; font-weight:500; color:var(--charcoal-lt); transition:all var(--transition); }
+    .social-pill:hover { border-color:var(--teal); color:var(--teal); background:rgba(91,140,140,0.05); }
+    .faq-section { padding:0 0 88px; }
+    .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:44px; }
+    .faq-item { background:var(--cream-dark); border-radius:var(--radius); padding:32px; }
+    .faq-item h4 { font-family:var(--serif); font-size:1.05rem; color:var(--charcoal); margin-bottom:12px; }
+    .faq-item p { font-size:0.88rem; color:var(--charcoal-lt); line-height:1.78; }
+    .form-card { background:var(--white); border-radius:var(--radius-lg); padding:48px; box-shadow:var(--shadow-md); }
+    .form-card h3 { font-family:var(--serif); font-size:1.6rem; color:var(--charcoal); margin-bottom:6px; }
+    .form-card .sub { font-size:0.86rem; color:var(--charcoal-xs); margin-bottom:36px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .form-group { margin-bottom:18px; }
+    .form-group label { display:block; font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal-xs); margin-bottom:8px; }
+    .form-control { width:100%; background:var(--cream-mid); border:1.5px solid rgba(44,37,34,0.1); border-radius:var(--radius); padding:13px 16px; font-family:var(--sans); font-size:0.9rem; color:var(--charcoal); outline:none; transition:border-color var(--transition),box-shadow var(--transition); }
+    .form-control::placeholder { color:var(--charcoal-xs); opacity:0.5; }
+    .form-control:focus { border-color:var(--teal); box-shadow:0 0 0 3px rgba(91,140,140,0.1); }
+    textarea.form-control { resize:vertical; min-height:148px; }
+    select.form-control { appearance:none; cursor:pointer; }
+    .form-note { font-size:0.76rem; color:var(--charcoal-xs); margin-top:6px; opacity:0.7; }
+    .form-submit { width:100%; justify-content:center; font-size:0.88rem; padding:18px; margin-top:6px; }
+    .success-msg { display:none; text-align:center; padding:32px; background:rgba(91,140,140,0.08); border:1.5px solid rgba(91,140,140,0.2); border-radius:var(--radius); }
+    .success-msg h4 { font-family:var(--serif); font-size:1.3rem; color:var(--teal); margin-bottom:8px; }
+    .success-msg p { font-size:0.9rem; color:var(--charcoal-lt); }
+    @media(max-width:900px){.contact-layout{grid-template-columns:1fr;gap:52px;}.faq-grid{grid-template-columns:1fr;}}
+    @media(max-width:540px){.form-row{grid-template-columns:1fr;}.form-card{padding:28px;}}
+  </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">The Sophia <em>Studios</em></a>
+    <ul class="nav-links">
+      <li><a href="work.html">The Work</a></li>
+      <li><a href="index.html#hybrid">The Experience</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="work.html">The Work</a><a href="index.html#hybrid">The Experience</a><a href="shop.html">Shop</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a>
+</div>
+
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow">Get in Touch</span>
+    <h1>Let's talk<br>about art</h1>
+    <p>Commissions, collector inquiries, exhibition partnerships, press — we'd love to hear from you.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="contact-layout">
+    <!-- Left -->
+    <div class="reveal">
+      <span class="eyebrow">Contact Details</span>
+      <h2 style="margin-top:16px;">How can we<br><em>help you?</em></h2>
+      <p class="lead">Whether you're a collector looking to acquire a piece, a venue interested in hosting a pop-up exhibition, or a journalist covering the art world — the right contact is below.</p>
+
+      <div class="contact-block">
+        <p class="contact-block-label">General Inquiries</p>
+        <p class="contact-block-value"><a href="mailto:hello@thesophiastudios.com">hello@thesophiastudios.com</a></p>
+      </div>
+      <div class="contact-block">
+        <p class="contact-block-label">Orders &amp; Shipping</p>
+        <p class="contact-block-value"><a href="mailto:orders@thesophiastudios.com">orders@thesophiastudios.com</a></p>
+      </div>
+      <div class="contact-block">
+        <p class="contact-block-label">Press &amp; Partnerships</p>
+        <p class="contact-block-value"><a href="mailto:press@thesophiastudios.com">press@thesophiastudios.com</a></p>
+      </div>
+      <div class="contact-block">
+        <p class="contact-block-label">Live Exhibitions</p>
+        <p class="contact-block-value">New York City, NY<br><span style="font-size:0.82rem;opacity:0.6;">Exact venue announced per show</span></p>
+      </div>
+
+      <div class="contact-divider"></div>
+
+      <div class="contact-block">
+        <p class="contact-block-label">Response Time</p>
+        <p class="contact-block-value">We aim to reply within 2 business days. For urgent order inquiries, please include your order number in the subject line.</p>
+      </div>
+      <div class="contact-block">
+        <p class="contact-block-label">Commissions</p>
+        <p class="contact-block-value">Juliana accepts a limited number of commissions each year. Please describe your vision and intended space in your message — the more detail, the better.</p>
+      </div>
+
+      <div class="contact-divider"></div>
+      <p style="font-size:0.78rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal-xs);margin-bottom:16px;">Follow Along</p>
+      <div class="social-row">
+        <a href="#" class="social-pill">𝕏 Twitter</a>
+        <a href="#" class="social-pill">◈ Instagram</a>
+        <a href="#" class="social-pill">in LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="reveal reveal-delay-2">
+      <div class="form-card">
+        <h3>Send a Message</h3>
+        <p class="sub">We read every message and reply personally.</p>
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" class="form-control" placeholder="Olivia" required/>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" class="form-control" placeholder="Bennett" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" class="form-control" placeholder="olivia@example.com" required/>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone (optional)</label>
+            <input type="tel" id="phone" class="form-control" placeholder="+1 (212) 000-0000"/>
+          </div>
+          <div class="form-group">
+            <label for="inquiry">Inquiry Type *</label>
+            <select id="inquiry" class="form-control" required>
+              <option value="">Select a topic...</option>
+              <option>Commission a Painting</option>
+              <option>Purchase / Bid on Original</option>
+              <option>Print Order Inquiry</option>
+              <option>Host a Pop-Up Exhibition</option>
+              <option>Press &amp; Media</option>
+              <option>Partnership / Collaboration</option>
+              <option>Virtual Gallery Access</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="budget">Budget (for commissions)</label>
+            <select id="budget" class="form-control">
+              <option value="">Not applicable</option>
+              <option>Under $1,000</option>
+              <option>$1,000 – $3,000</option>
+              <option>$3,000 – $6,000</option>
+              <option>$6,000 – $10,000</option>
+              <option>$10,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" class="form-control" placeholder="Tell us about what you're looking for. The more detail you share, the better we can help." required></textarea>
+          </div>
+          <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;">
+            <input type="checkbox" id="newsletter" style="margin-top:3px;accent-color:var(--teal);width:16px;height:16px;flex-shrink:0;"/>
+            <label for="newsletter" style="font-size:0.82rem;color:var(--charcoal-lt);cursor:pointer;text-transform:none;letter-spacing:0;">Subscribe to studio updates — early access to new releases and exhibition invitations.</label>
+          </div>
+          <p class="form-note">* Required fields. Your information will never be shared or sold.</p>
+          <button type="submit" class="btn btn-dark form-submit">Send Message →</button>
+        </form>
+        <div class="success-msg" id="success-msg">
+          <h4>Message received ✦</h4>
+          <p>Thank you for reaching out. We'll be in touch within 2 business days.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="divider" style="margin-bottom:72px;"></div>
+    <span class="eyebrow reveal">Common Questions</span>
+    <h2 style="font-size:clamp(1.9rem,3vw,2.8rem);margin-top:12px;" class="reveal">Before you reach out</h2>
+    <div class="faq-grid reveal">
+      <div class="faq-item">
+        <h4>How do I place a bid on an original?</h4>
+        <p>Fill out the contact form with "Purchase / Bid on Original" selected. Include the artwork name and your maximum offer. We'll confirm the current reserve and guide you through the process.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Do you ship internationally?</h4>
+        <p>Yes — prints and originals ship worldwide. Prints are shipped flat-packed in rigid mailers. Originals are professionally packed, insured, and tracked. Shipping costs are calculated at checkout.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How long do commissions take?</h4>
+        <p>Typically 8–14 weeks from deposit to delivery, depending on size and complexity. Juliana accepts a limited number of commissions each year, so early enquiry is recommended.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can I see the work in person before buying?</h4>
+        <p>Absolutely. Original works available in NYC can be viewed by appointment. The virtual gallery also lets you zoom into brushstroke-level detail. Contact us to arrange an in-person viewing.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What's included with an original painting?</h4>
+        <p>Every original comes with a signed Certificate of Authenticity, care instructions, the work's backstory in writing, and professional packing. Framing is available as an add-on.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How do I host a pop-up exhibition?</h4>
+        <p>We partner with venues in NYC and select cities. If you have a space — a gallery, hotel lobby, private home, or event venue — and would like to host a Sophia Studios pop-up, tell us about it via the contact form.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="footer-brand-logo">The Sophia <em>Studios</em></div><p>Mixed-media and abstract paintings rooted in a life of global travel.</p><p class="sub">Live Exhibitions: New York City · Virtual Gallery: Worldwide</p><div class="footer-social"><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">◈</a></div></div>
+    <div class="footer-col"><h5>Explore</h5><ul><li><a href="work.html">The Work</a></li><li><a href="index.html#hybrid">The Experience</a></li><li><a href="shop.html">Shop</a></li><li><a href="journal.html">Journal</a></li></ul></div>
+    <div class="footer-col"><h5>Collect</h5><ul><li><a href="shop.html">Giclée Prints</a></li><li><a href="shop.html">Originals</a></li><li><a href="#">Bidding Guide</a></li><li><a href="#">Shipping &amp; Returns</a></li></ul></div>
+    <div class="footer-newsletter"><h5>Stay in the Studio</h5><p>Receive early access to new releases and exhibition invitations.</p><div class="nl-form"><input type="email" class="nl-input" placeholder="your@email.com"/><button class="nl-btn">Subscribe</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2024 The Sophia Studios. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div></div>
+</div></footer>
+<script>
+  document.getElementById('nav').classList.add('scrolled');
+  const h=document.getElementById('hamburger'),m=document.getElementById('nav-mobile');
+  h.addEventListener('click',()=>{h.classList.toggle('open');m.classList.toggle('open');});
+  const ro=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*65);ro.unobserve(en.target);}});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contact-form').style.display='none';
+    document.getElementById('success-msg').style.display='block';
+  }
+</script>
+</body></html>

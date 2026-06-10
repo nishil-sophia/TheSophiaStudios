@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop — The Sophia Studios</title>
+  <meta name="description" content="Collect Juliana Sophia's work. Museum-quality giclée prints and original paintings from the Paris & Beyond and Life Stages collections. Ships worldwide."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .shop-layout { display: grid; grid-template-columns: 260px 1fr; gap: 60px; align-items: start; padding: 80px 0; }
+    .sidebar { position: sticky; top: calc(var(--nav-h) + 32px); }
+    .sidebar-section { margin-bottom: 36px; padding-bottom: 36px; border-bottom: 1px solid rgba(44,37,34,0.1); }
+    .sidebar-section:last-child { border-bottom: none; }
+    .sidebar-section h4 { font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--charcoal-xs); margin-bottom: 16px; }
+    .sidebar-check { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer; }
+    .sidebar-check input { accent-color: var(--teal); width: 16px; height: 16px; cursor: pointer; }
+    .sidebar-check label { font-size: 0.88rem; color: var(--charcoal-lt); cursor: pointer; }
+    .price-range { width: 100%; accent-color: var(--teal); }
+    .price-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--charcoal-xs); margin-top: 8px; }
+    .sort-select { width: 100%; padding: 9px 12px; border: 1.5px solid rgba(44,37,34,0.15); border-radius: var(--radius); background: var(--cream); font-family: var(--sans); font-size: 0.85rem; color: var(--charcoal); outline: none; cursor: pointer; }
+    .results-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+    .results-count { font-size: 0.84rem; color: var(--charcoal-xs); }
+    .shop-full-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .product-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; transition: transform var(--transition), box-shadow var(--transition); cursor: pointer; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .product-img { width: 100%; aspect-ratio: 1; overflow: hidden; position: relative; }
+    .product-img svg { width: 100%; height: 100%; transition: transform 0.7s ease; }
+    .product-card:hover .product-img svg { transform: scale(1.05); }
+    .product-badge { position: absolute; top: 12px; left: 12px; padding: 4px 12px; border-radius: 20px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge-new { background: var(--teal); color: var(--cream); }
+    .badge-bid { background: var(--terra); color: var(--cream); }
+    .badge-ltd { background: var(--charcoal); color: var(--cream); }
+    .product-body { padding: 20px 20px 22px; }
+    .product-body h4 { font-family: var(--serif); font-size: 1rem; color: var(--charcoal); margin-bottom: 3px; }
+    .product-series { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--charcoal-xs); margin-bottom: 12px; }
+    .product-foot { display: flex; align-items: center; justify-content: space-between; }
+    .product-from { font-size: 0.65rem; color: var(--charcoal-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    .product-price { font-size: 1rem; font-weight: 600; color: var(--charcoal); }
+    .add-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--charcoal); color: var(--cream); border: none; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background var(--transition), transform var(--transition); }
+    .add-btn:hover { background: var(--teal); transform: scale(1.12); }
+    .add-btn-terra { background: var(--terra); }
+    .add-btn-terra:hover { background: #a8634a; }
+    .trust-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--charcoal); border-radius: var(--radius); overflow: hidden; margin-top: 60px; }
+    .trust-cell { padding: 28px 24px; display: flex; flex-direction: column; gap: 8px; border-right: 1px solid rgba(255,255,255,0.07); }
+    .trust-cell:last-child { border-right: none; }
+    .trust-cell .icon { font-size: 1.4rem; }
+    .trust-cell h5 { font-family: var(--sans); font-size: 0.82rem; font-weight: 600; color: var(--cream); }
+    .trust-cell p { font-size: 0.78rem; color: rgba(248,244,237,0.5); line-height: 1.55; }
+    @media (max-width: 1000px) { .shop-layout { grid-template-columns: 1fr; } .sidebar { position: static; } .shop-full-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .shop-full-grid { grid-template-columns: 1fr; } .trust-bar { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">The Sophia <em>Studios</em></a>
+    <ul class="nav-links">
+      <li><a href="work.html">The Work</a></li>
+      <li><a href="index.html#hybrid">The Experience</a></li>
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="work.html">The Work</a>
+  <a href="index.html#hybrid">The Experience</a>
+  <a href="shop.html">Shop</a>
+  <a href="journal.html">Journal</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-header">
+  <div class="container">
+    <span class="eyebrow">The Collection</span>
+    <h1>Shop Prints<br>&amp; Originals</h1>
+    <p>Museum-quality giclée prints and original paintings — each piece shipped worldwide with a certificate of authenticity.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="shop-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar reveal">
+      <div class="sidebar-section">
+        <h4>Sort By</h4>
+        <select class="sort-select">
+          <option>Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Newest First</option>
+        </select>
+      </div>
+      <div class="sidebar-section">
+        <h4>Type</h4>
+        <label class="sidebar-check"><input type="checkbox" checked/><label>All Works</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Giclée Prints</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Original Paintings</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Limited Editions</label></label>
+      </div>
+      <div class="sidebar-section">
+        <h4>Series</h4>
+        <label class="sidebar-check"><input type="checkbox" checked/><label>All Series</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Paris &amp; Beyond</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Life Stages (Abstract)</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Interiors</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Studio Series</label></label>
+      </div>
+      <div class="sidebar-section">
+        <h4>Price Range</h4>
+        <input type="range" class="price-range" min="50" max="5000" value="5000"/>
+        <div class="price-labels"><span>$50</span><span>$5,000+</span></div>
+      </div>
+      <div class="sidebar-section">
+        <h4>Medium</h4>
+        <label class="sidebar-check"><input type="checkbox"/><label>Oil on Canvas</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Oil on Paper</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Acrylic</label></label>
+        <label class="sidebar-check"><input type="checkbox"/><label>Mixed Media</label></label>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div>
+      <div class="results-bar reveal">
+        <p class="results-count">Showing 9 works</p>
+        <a href="index.html#hybrid" class="btn btn-teal" style="font-size:0.8rem;padding:11px 22px;">Enter Virtual Gallery ↗</a>
+      </div>
+
+      <div class="shop-full-grid">
+        <!-- 1 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#d4938a"/><rect x="210" width="190" height="400" fill="#6badb8"/>
+              <rect x="224" y="22" width="168" height="240" fill="#7abcc5"/><rect x="224" y="22" width="168" height="240" fill="rgba(60,110,55,0.28)"/>
+              <line x1="308" y1="22" x2="308" y2="262" stroke="rgba(255,255,255,0.38)" stroke-width="5"/>
+              <line x1="224" y1="142" x2="392" y2="142" stroke="rgba(255,255,255,0.38)" stroke-width="5"/>
+              <rect y="305" width="400" height="95" fill="#9a7055"/>
+              <ellipse cx="238" cy="332" rx="76" ry="48" fill="#ece7e0"/>
+              <circle cx="238" cy="282" r="42" fill="#e0dbd4"/>
+              <ellipse cx="222" cy="276" rx="15" ry="19" fill="#b0a8a0"/><ellipse cx="254" cy="276" rx="15" ry="19" fill="#b0a8a0"/>
+              <ellipse cx="222" cy="278" rx="8" ry="10" fill="#4a7a6a"/><ellipse cx="254" cy="278" rx="8" ry="10" fill="#4a7a6a"/>
+              <circle cx="222" cy="278" r="4.5" fill="#1a1a1a"/><circle cx="254" cy="278" r="4.5" fill="#1a1a1a"/>
+            </svg>
+            <span class="product-badge badge-new">New</span>
+          </div>
+          <div class="product-body">
+            <h4>Le Chat de la Porte Bleue</h4>
+            <p class="product-series">Paris Series · Giclée Print · 4 sizes</p>
+            <div class="product-foot">
+              <div><p class="product-from">From</p><p class="product-price">$150</p></div>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#6fa89a"/><rect width="400" height="172" fill="#c5dde0"/>
+              <ellipse cx="100" cy="148" rx="68" ry="40" fill="#3a6b31"/><ellipse cx="270" cy="142" rx="78" ry="44" fill="#2d5a27"/>
+              <rect y="188" width="400" height="212" fill="#6fa89a"/>
+              <ellipse cx="130" cy="318" rx="26" ry="6.5" fill="#b89060"/>
+              <rect x="121" y="258" width="4" height="58" fill="#6a5040"/>
+              <polygon points="123,261 123,314 152,288" fill="#2a2520"/>
+              <ellipse cx="222" cy="312" rx="25" ry="6" fill="#b89060"/>
+              <rect x="214" y="264" width="4" height="46" fill="#6a5040"/>
+              <polygon points="216,267 216,308 244,288" fill="#2a2520"/>
+            </svg>
+          </div>
+          <div class="product-body">
+            <h4>Deux Voiles, Saint-Martin</h4>
+            <p class="product-series">Paris Series · Giclée Print · 3 sizes</p>
+            <div class="product-foot">
+              <div><p class="product-from">From</p><p class="product-price">$120</p></div>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#4a8a5a"/><rect width="400" height="130" fill="#b8d8e5"/>
+              <polygon points="192,0 174,400 226,400 208,0" fill="#9a7860" opacity="0.8"/>
+              <rect x="175" y="62" width="57" height="8" fill="#8a6850" opacity="0.85"/>
+              <rect x="172" y="115" width="63" height="8" fill="#8a6850" opacity="0.82"/>
+              <ellipse cx="72" cy="290" rx="98" ry="128" fill="#2a6030"/>
+              <ellipse cx="338" cy="284" rx="104" ry="132" fill="#2a6030"/>
+              <circle cx="305" cy="292" r="8" fill="#c84040"/><circle cx="325" cy="308" r="7" fill="#b83030"/>
+              <polygon points="152,400 248,400 232,202 168,202" fill="#d4b870" opacity="0.6"/>
+            </svg>
+            <span class="product-badge badge-bid">Bid</span>
+          </div>
+          <div class="product-body">
+            <h4>Champ de Mars — Original</h4>
+            <p class="product-series">Paris Series · Oil on Canvas · Original</p>
+            <div class="product-foot">
+              <div><p class="product-from">Bid from</p><p class="product-price">$3,200</p></div>
+              <button class="add-btn add-btn-terra">→</button>
+            </div>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#e8d5c0"/>
+              <rect x="0" y="0" width="200" height="200" fill="rgba(91,140,140,0.22)"/>
+              <rect x="200" y="200" width="200" height="200" fill="rgba(193,122,93,0.2)"/>
+              <ellipse cx="200" cy="200" rx="140" ry="140" fill="rgba(91,140,140,0.18)"/>
+              <path d="M30 190 Q110 145 200 200 Q290 255 370 205" stroke="#2C2522" stroke-width="3" fill="none" opacity="0.3"/>
+              <path d="M15 310 Q100 265 200 310 Q300 355 385 325" stroke="#5B8C8C" stroke-width="4" fill="none" opacity="0.42"/>
+              <circle cx="110" cy="120" r="38" fill="rgba(91,140,140,0.28)"/>
+              <circle cx="290" cy="288" r="42" fill="rgba(193,122,93,0.22)"/>
+            </svg>
+            <span class="product-badge badge-ltd">Abstract</span>
+          </div>
+          <div class="product-body">
+            <h4>Life Stages I — Becoming</h4>
+            <p class="product-series">Life Stages Series · Giclée Print</p>
+            <div class="product-foot">
+              <div><p class="product-from">From</p><p class="product-price">$185</p></div>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#ddd0bc"/>
+              <rect x="0" y="0" width="400" height="200" fill="rgba(91,140,140,0.18)"/>
+              <rect x="0" y="200" width="400" height="200" fill="rgba(193,122,93,0.15)"/>
+              <path d="M0 200 Q100 168 200 200 Q300 232 400 200" stroke="rgba(44,37,34,0.28)" stroke-width="2.5" fill="rgba(44,37,34,0.04)"/>
+              <circle cx="130" cy="100" r="58" fill="rgba(248,244,237,0.35)" stroke="rgba(91,140,140,0.38)" stroke-width="2"/>
+              <circle cx="270" cy="298" r="54" fill="rgba(44,37,34,0.07)" stroke="rgba(193,122,93,0.32)" stroke-width="2"/>
+              <path d="M0,75 Q60,55 120,84 T240,74 T360,98" stroke="#5B8C8C" stroke-width="3.5" fill="none" opacity="0.48"/>
+              <path d="M0,328 Q80,308 160,338 T320,322 T400,338" stroke="#C17A5D" stroke-width="3" fill="none" opacity="0.44"/>
+            </svg>
+            <span class="product-badge badge-ltd">Abstract</span>
+          </div>
+          <div class="product-body">
+            <h4>Life Stages II — In Between</h4>
+            <p class="product-series">Life Stages Series · Giclée Print</p>
+            <div class="product-foot">
+              <div><p class="product-from">From</p><p class="product-price">$165</p></div>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <!-- 6 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="400" fill="#f0e8da"/>
+              <rect x="260" y="0" width="140" height="300" fill="rgba(255,225,150,0.32)"/>
+              <line x1="330" y1="0" x2="330" y2="300" stroke="rgba(200,175,130,0.4)" stroke-width="4"/>
+              <rect x="0" y="295" width="400" height="105" fill="#c8b898"/>
+              <rect x="30" y="295" width="340" height="12" fill="#8a6a48"/>
+              <rect x="140" y="148" width="72" height="108" rx="36" fill="#5B8C8C"/>
+              <ellipse cx="176" cy="150" rx="36" ry="10" fill="#6a9d9d"/>
+              <circle cx="148" cy="120" r="18" fill="#C17A5D"/>
+              <circle cx="175" cy="105" r="20" fill="#d4885a"/>
+              <circle cx="202" cy="116" r="17" fill="#C17A5D"/>
+              <circle cx="158" cy="92" r="14" fill="#b86a4a"/>
+              <rect x="58" y="270" width="65" height="28" rx="2" fill="#6a5a90" transform="rotate(-3 58 270)"/>
+            </svg>
+          </div>
+          <div class="product-body">
+            <h4>Still Life with Teal Vase</h4>
+            <p class="product-series">Interiors Series · Giclée Print · 5 sizes</p>
+            <div class="product-foot">
+              <div><p class="product-from">From</p><p class="product-price">$95</p></div>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <!-- 7 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <!-- Abstract III - Arrival -->
+              <rect width="400" height="400" fill="#e0d8cc"/>
+              <polygon points="0,400 200,0 400,400" fill="rgba(91,140,140,0.2)"/>
+              <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(193,122,93,0.3)" stroke-width="3"/>
+              <circle cx="200" cy="200" r="80" fill="none" stroke="rgba(44,37,34,0.12)" stroke-width="2"/>
+              <circle cx="200" cy="200" r="40" fill="rgba(91,140,140,0.18)"/>
+              <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(44,37,34,0.12)" stroke-width="1.5"/>
+              <line x1="200" y1="0" x2="200" y2="400" stroke="rgba(44,37,34,0.12)" stroke-width="1.5"/>
+              <path d="M60,340 Q130,290 200,320 Q270,350 340,290" stroke="#5B8C8C" stroke-width="4" fill="none" opacity="0.5"/>
+              <rect x="180" y="80" width="40" height="240" rx="20" fill="rgba(193,122,93,0.18)"/>
+            </svg>
+            <span class="product-badge badge-ltd">Abstract</span>
+          </div>
+          <div class="product-body">
+            <h4>Life Stages III — Arrival</h4>
+            <p class="product-series">Life Stages Series · Giclée Print</p>
+            <div class="product-foot">
+              <div><p class="product-from">From</p><p class="product-price">$175</p></div>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <!-- 8 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <!-- Île de Ré Harbor -->
+              <rect width="400" height="400" fill="#b8d5d0"/>
+              <rect width="400" height="180" fill="#d0e8ec"/>
+              <rect y="172" width="400" height="228" fill="#88bab4"/>
+              <rect y="155" width="400" height="28" fill="#c0aa80"/>
+              <rect y="160" width="400" height="18" fill="#b89870"/>
+              <ellipse cx="80" cy="148" rx="64" ry="36" fill="#2d5a27"/>
+              <ellipse cx="220" cy="140" rx="72" ry="40" fill="#357030"/>
+              <ellipse cx="350" cy="146" rx="58" ry="34" fill="#2d5a27"/>
+              <rect x="170" y="70" width="3" height="78" fill="#6a5040"/>
+              <rect x="172" y="70" width="12" height="26" fill="#002395"/>
+              <rect x="184" y="70" width="12" height="26" fill="#EEE"/>
+              <rect x="196" y="70" width="12" height="26" fill="#ED2939"/>
+              <ellipse cx="120" cy="310" rx="24" ry="6" fill="#c0a060"/>
+              <rect x="112" y="256" width="4" height="52" fill="#6a5040"/>
+              <polygon points="114,259 114,308 140,284" fill="#2a2520"/>
+              <ellipse cx="210" cy="304" rx="22" ry="5.5" fill="#c0a060"/>
+              <rect x="203" y="262" width="4" height="40" fill="#6a5040"/>
+              <polygon points="205,265 205,300 229,283" fill="#2a2520"/>
+              <ellipse cx="295" cy="316" rx="26" ry="6" fill="#c0a060"/>
+              <rect x="286" y="256" width="4" height="58" fill="#6a5040"/>
+              <polygon points="288,259 288,313 316,286" fill="#2a2520"/>
+            </svg>
+            <span class="product-badge badge-bid">Bid</span>
+          </div>
+          <div class="product-body">
+            <h4>Trois Voiles, Île de Ré — Original</h4>
+            <p class="product-series">Paris Series · Oil on Paper · Original</p>
+            <div class="product-foot">
+              <div><p class="product-from">Bid from</p><p class="product-price">$2,600</p></div>
+              <button class="add-btn add-btn-terra">→</button>
+            </div>
+          </div>
+        </div>
+        <!-- 9 -->
+        <div class="product-card reveal">
+          <div class="product-img">
+            <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <!-- Morning Window interior -->
+              <rect width="400" height="400" fill="#e8dcc8"/>
+              <rect x="40" y="20" width="320" height="280" fill="rgba(200,220,230,0.5)"/>
+              <rect x="40" y="20" width="320" height="280" fill="rgba(255,230,160,0.25)"/>
+              <line x1="200" y1="20" x2="200" y2="300" stroke="rgba(160,140,100,0.5)" stroke-width="5"/>
+              <line x1="40" y1="160" x2="360" y2="160" stroke="rgba(160,140,100,0.5)" stroke-width="5"/>
+              <rect x="35" y="15" width="330" height="10" fill="#8a6a48"/>
+              <rect x="35" y="290" width="330" height="10" fill="#8a6a48"/>
+              <rect x="35" y="15" width="10" height="285" fill="#8a6a48"/>
+              <rect x="355" y="15" width="10" height="285" fill="#8a6a48"/>
+              <ellipse cx="200" cy="345" rx="120" ry="18" fill="rgba(44,37,34,0.06)"/>
+              <rect x="0" y="310" width="400" height="90" fill="#c8b898"/>
+              <rect x="130" y="280" width="140" height="32" fill="#8a6a48"/>
+              <!-- coffee cup on sill -->
+              <rect x="290" y="290" width="38" height="24" rx="4" fill="#e8e0d8"/>
+              <ellipse cx="309" cy="290" rx="19" ry="6" fill="#d8d0c8"/>
+              <!-- Garden glimpse through window -->
+              <ellipse cx="100" cy="120" rx="55" ry="65" fill="rgba(50,120,40,0.28)"/>
+              <ellipse cx="280" cy="100" rx="60" ry="70" fill="rgba(40,110,35,0.22)"/>
+            </svg>
+          </div>
+          <div class="product-body">
+            <h4>Morning Window, NYC</h4>
+            <p class="product-series">Interiors Series · Oil on Canvas · Original</p>
+            <div class="product-foot">
+              <div><p class="product-from">Bid from</p><p class="product-price">$1,900</p></div>
+              <button class="add-btn add-btn-terra">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust-bar reveal">
+        <div class="trust-cell"><span class="icon">🖼️</span><h5>Museum-Quality Prints</h5><p>Archival giclée on 300gsm cotton rag. Colours guaranteed for 100+ years.</p></div>
+        <div class="trust-cell"><span class="icon">📦</span><h5>Insured Shipping</h5><p>Every order is insured and tracked worldwide. Flat-packed or tube depending on size.</p></div>
+        <div class="trust-cell"><span class="icon">📜</span><h5>Certificate of Authenticity</h5><p>All originals and limited editions arrive with a signed CoA from the artist.</p></div>
+        <div class="trust-cell"><span class="icon">🔄</span><h5>30-Day Returns</h5><p>Not happy? Return in original packaging within 30 days for a full refund.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-logo">The Sophia <em>Studios</em></div>
+      <p>Mixed-media and abstract paintings rooted in a life of global travel — exhibited live in New York City and virtually, everywhere else.</p>
+      <p class="sub">Live Exhibitions: New York City · Virtual Gallery: Worldwide</p>
+      <div class="footer-social"><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">◈</a></div>
+    </div>
+    <div class="footer-col"><h5>Explore</h5><ul><li><a href="work.html">The Work</a></li><li><a href="index.html#hybrid">The Experience</a></li><li><a href="shop.html">Shop</a></li><li><a href="journal.html">Journal</a></li></ul></div>
+    <div class="footer-col"><h5>Collect</h5><ul><li><a href="shop.html">Giclée Prints</a></li><li><a href="shop.html">Originals</a></li><li><a href="#">Bidding Guide</a></li><li><a href="#">Shipping &amp; Returns</a></li></ul></div>
+    <div class="footer-newsletter"><h5>Stay in the Studio</h5><p>Receive early access to new releases and exhibition invitations.</p><div class="nl-form"><input type="email" class="nl-input" placeholder="your@email.com"/><button class="nl-btn">Subscribe</button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2024 The Sophia Studios. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Shipping</a></div></div>
+</div></footer>
+<script>
+  document.getElementById('nav').classList.add('scrolled');
+  const h=document.getElementById('hamburger'),m=document.getElementById('nav-mobile');
+  h.addEventListener('click',()=>{h.classList.toggle('open');m.classList.toggle('open');});
+  const ro=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('visible'),i*60);ro.unobserve(en.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body></html>

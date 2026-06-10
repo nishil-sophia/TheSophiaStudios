@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Sophia Studios — Signature Hybrid Art Experiences</title>
+  <meta name="description" content="The Sophia Studios presents the work of Juliana Sophia — mixed-media paintings rooted in global travel. Live exhibitions in New York City. Immersive virtual galleries and collectible prints worldwide."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: var(--nav-h);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 72px 80px 60px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 26px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.15s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 5.5vw, 6rem);
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+    }
+
+    .hero-title-studio {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2vw, 1.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--teal);
+      margin-bottom: 30px;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.45s forwards;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--charcoal-lt);
+      max-width: 430px;
+      line-height: 1.82;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-btns {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.75s forwards;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.9s forwards;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--charcoal);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal-xs);
+    }
+    .stat-divider {
+      width: 1px;
+      background: rgba(44,37,34,0.12);
+      align-self: stretch;
+    }
+
+    /* Hero right — mosaic */
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 1.1s 0.2s forwards;
+    }
+
+    .hero-mosaic {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      grid-template-rows: 1.1fr 0.9fr;
+      height: 100%;
+      gap: 3px;
+      background: var(--charcoal);
+    }
+
+    .mosaic-cell {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .mosaic-cell svg {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .mosaic-cell:hover svg { transform: scale(1.06); }
+
+    .mosaic-feature { grid-row: 1 / 3; }
+
+    .hero-live-badge {
+      position: absolute;
+      bottom: 36px; left: -8px;
+      background: var(--cream);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 18px 26px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 10;
+    }
+    .live-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--terra);
+      flex-shrink: 0;
+      animation: pulse 2.2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.55; transform:scale(1.35); }
+    }
+    .live-text { line-height: 1.3; }
+    .live-text strong { display: block; font-size: 0.8rem; font-weight: 600; color: var(--charcoal); }
+    .live-text span { font-size: 0.7rem; color: var(--charcoal-xs); }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 36px; right: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s 1.4s forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, transparent, var(--charcoal-lt));
+      animation: scrollDrop 2s 1.5s infinite;
+    }
+    @keyframes scrollDrop {
+      0%,100% { transform: scaleY(1); opacity: 0.4; }
+      50% { transform: scaleY(1.2); opacity: 1; }
+    }
+    .scroll-label {
+      writing-mode: vertical-rl;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--charcoal-xs);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-strip {
+      background: var(--charcoal);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-item {
+      font-family: var(--serif);
+      font-size: 0.88rem;
+      font-style: italic;
+      color: rgba(248,244,237,0.45);
+      padding: 0 40px;
+      flex-shrink: 0;
+    }
+    .marquee-item .dot { color: var(--terra); margin: 0 16px; font-style: normal; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--cream-mid);
+      padding: 100px 0;
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+    .about-portrait {
+      position: relative;
+    }
+    .about-portrait-frame {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+    .about-portrait-frame svg { width: 100%; height: 100%; }
+    .about-portrait-accent {
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 60%; height: 60%;
+      border: 2px solid var(--teal);
+      border-radius: var(--radius);
+      z-index: -1;
+      opacity: 0.4;
+    }
+    .about-portrait-caption {
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(44,37,34,0.75) 0%, transparent 100%);
+      padding: 40px 28px 24px;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    .about-portrait-caption p { font-size: 0.8rem; color: rgba(248,244,237,0.8); font-style: italic; }
+
+    .about-content { max-width: 520px; }
+    .about-content h2 {
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      margin-bottom: 10px;
+      color: var(--charcoal);
+    }
+    .about-content h2 em { color: var(--teal); }
+    .about-subtitle {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--terra);
+      margin-bottom: 28px;
+    }
+    .about-content p {
+      font-size: 0.97rem;
+      color: var(--charcoal-lt);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .about-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 28px 0 36px;
+    }
+    .pill {
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .pill-teal { background: rgba(91,140,140,0.12); color: var(--teal); }
+    .pill-terra { background: rgba(193,122,93,0.1); color: var(--terra); }
+    .pill-charcoal { background: rgba(44,37,34,0.08); color: var(--charcoal-lt); }
+
+    /* ── HYBRID ── */
+    .hybrid { background: var(--charcoal); padding: 110px 0; }
+    .hybrid-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 70px;
+    }
+    .hybrid-top h2 { font-size: clamp(2.2rem, 3.5vw, 3.5rem); color: var(--cream); line-height: 1.12; }
+    .hybrid-top h2 em { font-style: italic; color: var(--teal-light); }
+    .hybrid-top-right p { font-size: 0.97rem; color: rgba(248,244,237,0.58); line-height: 1.85; max-width: 440px; margin-left: auto; }
+    .hybrid-eyebrow { color: var(--terra) !important; }
+
+    .hybrid-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 60px;
+    }
+    .h-step {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 52px 40px;
+      transition: background var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .h-step::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--teal), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .h-step:hover { background: rgba(255,255,255,0.06); }
+    .h-step:hover::before { opacity: 1; }
+    .h-num {
+      font-family: var(--serif);
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(248,244,237,0.05);
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+    .h-icon {
+      width: 50px; height: 50px;
+      background: rgba(91,140,140,0.2);
+      border: 1px solid rgba(91,140,140,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 24px;
+    }
+    .h-step h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--cream); margin-bottom: 14px; }
+    .h-step p { font-size: 0.88rem; color: rgba(248,244,237,0.55); line-height: 1.8; }
+
+    .hybrid-video {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      cursor: pointer;
+    }
+    .hybrid-video::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(91,140,140,0.12) 0%, transparent 65%);
+    }
+    .play-ring {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      position: relative; z-index: 1;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .hybrid-video:hover .play-ring {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 14px rgba(248,244,237,0.08);
+    }
+    .hybrid-video p { color: rgba(248,244,237,0.5); font-size: 0.84rem; letter-spacing: 0.12em; text-transform: uppercase; position: relative; z-index: 1; }
+
+    /* ── EXHIBITION ── */
+    .exhibition { padding: 110px 0; background: var(--cream); }
+    .exhibition-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+    .exhibition-header h2 { font-size: clamp(2.2rem, 3.5vw, 3.2rem); color: var(--charcoal); }
+    .exhibition-header p { font-size: 0.9rem; color: var(--charcoal-lt); max-width: 360px; text-align: right; line-height: 1.7; margin-bottom: 20px; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .gallery-grid-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.4fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .art-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      cursor: pointer;
+      background: var(--cream-dark);
+    }
+    .art-card svg { width: 100%; display: block; transition: transform 0.7s ease; }
+    .art-card:hover svg { transform: scale(1.05); }
+    .art-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(44,37,34,0.85) 0%, rgba(44,37,34,0.2) 40%, transparent 65%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 26px;
+    }
+    .art-card:hover .art-card-overlay { opacity: 1; }
+    .art-card-overlay h4 { font-family: var(--serif); font-size: 1.1rem; color: var(--cream); margin-bottom: 4px; }
+    .art-card-overlay .meta { font-size: 0.74rem; color: rgba(248,244,237,0.7); letter-spacing: 0.05em; margin-bottom: 10px; }
+    .art-card-overlay .price { font-size: 0.82rem; font-weight: 600; color: var(--terra-light); }
+    .art-tag {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: var(--terra);
+      color: var(--cream);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+    .art-tag-teal { background: var(--teal); }
+
+    .exhibition-cta-bar {
+      background: var(--charcoal);
+      border-radius: var(--radius);
+      padding: 56px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .exhibition-cta-bar::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(91,140,140,0.18) 0%, transparent 55%);
+    }
+    .exhibition-cta-bar-text { position: relative; }
+    .exhibition-cta-bar-text h3 { font-family: var(--serif); font-size: 1.9rem; color: var(--cream); margin-bottom: 8px; }
+    .exhibition-cta-bar-text p { font-size: 0.9rem; color: rgba(248,244,237,0.6); max-width: 440px; }
+    .exhibition-cta-bar .btn { position: relative; flex-shrink: 0; }
+
+    /* ── SHOP PREVIEW ── */
+    .shop-section { background: var(--cream-dark); padding: 110px 0; }
+    .shop-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 44px;
+    }
+    .shop-header h2 { font-size: clamp(2.2rem, 3.5vw, 3.2rem); }
+
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-pill {
+      padding: 8px 20px;
+      border: 1.5px solid rgba(44,37,34,0.18);
+      border-radius: 20px;
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--charcoal-lt);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-pill:hover, .filter-pill.active {
+      background: var(--charcoal);
+      color: var(--cream);
+      border-color: var(--charcoal);
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-bottom: 52px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-lg);
+    }
+    .product-img { width: 100%; aspect-ratio: 1; overflow: hidden; }
+    .product-img svg { width: 100%; height: 100%; transition: transform 0.7s ease; }
+    .product-card:hover .product-img svg { transform: scale(1.05); }
+    .product-body { padding: 20px 20px 22px; }
+    .product-body h4 { font-family: var(--serif); font-size: 1rem; color: var(--charcoal); margin-bottom: 3px; }
+    .product-series { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--charcoal-xs); margin-bottom: 14px; }
+    .product-foot { display: flex; align-items: center; justify-content: space-between; }
+    .product-price-block {}
+    .product-from { font-size: 0.68rem; color: var(--charcoal-xs); text-transform: uppercase; letter-spacing: 0.06em; }
+    .product-price { font-size: 1rem; font-weight: 600; color: var(--charcoal); }
+    .add-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      color: var(--cream);
+      border: none;
+      font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      flex-shrink: 0;
+    }
+    .add-btn:hover { background: var(--teal); transform: scale(1.12); }
+    .add-btn-terra { background: var(--terra); }
+    .add-btn-terra:hover { background: #a8634a; }
+
+    .trust-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      background: var(--cream);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .trust-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 26px 20px;
+      border-right: 1px solid rgba(44,37,34,0.08);
+      font-size: 0.82rem;
+      color: var(--charcoal-lt);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item .ti { font-size: 1.2rem; flex-shrink: 0; }
+
+    /* ── ABOUT ARTIST (deep) ── */
+    .artist-deep {
+      background: var(--cream);
+      padding: 110px 0;
+    }
+    .artist-deep-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .artist-deep-left h2 { font-size: clamp(2rem, 3vw, 3rem); margin-bottom: 10px; }
+    .artist-deep-left h2 em { color: var(--teal); font-style: italic; }
+    .artist-subtitle { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--terra); margin-bottom: 30px; }
+    .artist-body { font-size: 0.96rem; color: var(--charcoal-lt); line-height: 1.88; margin-bottom: 18px; }
+    .artist-quote {
+      border-left: 3px solid var(--teal);
+      padding: 20px 28px;
+      margin: 36px 0;
+      background: rgba(91,140,140,0.05);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .artist-quote p { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--charcoal); line-height: 1.65; }
+    .artist-quote cite { display: block; font-size: 0.75rem; color: var(--charcoal-xs); margin-top: 10px; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .artist-deep-right {}
+    .journey-list { list-style: none; }
+    .journey-item {
+      display: flex;
+      gap: 22px;
+      padding-bottom: 36px;
+      position: relative;
+    }
+    .journey-item::before {
+      content: '';
+      position: absolute;
+      left: 19px; top: 40px;
+      width: 1px;
+      bottom: 0;
+      background: rgba(44,37,34,0.1);
+    }
+    .journey-item:last-child::before { display: none; }
+    .journey-dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      border: 2px solid rgba(44,37,34,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .journey-dot.active {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+    .journey-text {}
+    .journey-year { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
+    .journey-title { font-family: var(--serif); font-size: 1.05rem; color: var(--charcoal); margin-bottom: 6px; }
+    .journey-desc { font-size: 0.85rem; color: var(--charcoal-xs); line-height: 1.7; }
+
+    /* ── JOURNAL ── */
+    .journal { background: var(--cream-mid); padding: 110px 0; }
+    .journal-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .journal-feature {}
+    .journal-feature-img { aspect-ratio: 16/9; overflow: hidden; border-radius: var(--radius); margin-bottom: 28px; }
+    .journal-feature-img svg { width: 100%; height: 100%; transition: transform 0.7s ease; }
+    .journal-feature:hover .journal-feature-img svg { transform: scale(1.04); }
+    .j-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .j-title { font-family: var(--serif); font-size: 1.5rem; color: var(--charcoal); margin-bottom: 12px; line-height: 1.3; cursor: pointer; }
+    .j-title:hover { color: var(--teal); }
+    .j-excerpt { font-size: 0.9rem; color: var(--charcoal-lt); line-height: 1.78; margin-bottom: 16px; }
+    .j-meta { font-size: 0.74rem; color: var(--charcoal-xs); }
+
+    .journal-stack { display: flex; flex-direction: column; gap: 28px; }
+    .journal-mini { display: flex; gap: 20px; align-items: flex-start; cursor: pointer; }
+    .journal-mini-img { width: 90px; height: 80px; border-radius: var(--radius); overflow: hidden; flex-shrink: 0; }
+    .journal-mini-img svg { width: 100%; height: 100%; transition: transform 0.6s ease; }
+    .journal-mini:hover .journal-mini-img svg { transform: scale(1.08); }
+    .journal-mini-body {}
+    .journal-mini-body .j-tag { margin-bottom: 6px; }
+    .journal-mini-body h4 { font-family: var(--serif); font-size: 0.98rem; color: var(--charcoal); line-height: 1.35; margin-bottom: 6px; }
+    .journal-mini-body .j-meta { font-size: 0.72rem; color: var(--charcoal-xs); }
+    .journal-mini-sep { height: 1px; background: rgba(44,37,34,0.08); }
+
+    /* ── CONTACT ── */
+    .contact-section { background: var(--cream); padding: 110px 0; }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .contact-left h2 { font-size: clamp(2.2rem, 3.5vw, 3.2rem); margin-bottom: 10px; }
+    .contact-left p { font-size: 0.97rem; color: var(--charcoal-lt); line-height: 1.82; margin-bottom: 40px; max-width: 440px; }
+    .contact-detail { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+    .contact-icon { width: 44px; height: 44px; background: rgba(91,140,140,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-detail-text strong { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-xs); margin-bottom: 3px; }
+    .contact-detail-text span { font-size: 0.92rem; color: var(--charcoal-lt); }
+
+    .contact-form { }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal-xs); margin-bottom: 8px; }
+    .form-control {
+      width: 100%;
+      background: var(--cream-dark);
+      border: 1.5px solid rgba(44,37,34,0.1);
+      border-radius: var(--radius);
+      padding: 13px 16px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-control::placeholder { color: var(--charcoal-xs); opacity: 0.55; }
+    .form-control:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(91,140,140,0.12); }
+    textarea.form-control { resize: vertical; min-height: 140px; }
+    select.form-control { appearance: none; cursor: pointer; }
+    .form-submit { width: 100%; justify-content: center; font-size: 0.88rem; padding: 18px; margin-top: 8px; }
+
+    /* ── NEWSLETTER CTA ── */
+    .newsletter-cta {
+      background: var(--teal);
+      padding: 88px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .newsletter-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.08) 0%, transparent 65%);
+    }
+    .newsletter-cta .container { position: relative; }
+    .newsletter-cta .eyebrow { color: rgba(248,244,237,0.65); text-align: center; display: block; margin-bottom: 16px; }
+    .newsletter-cta h2 { font-size: clamp(1.9rem, 3.5vw, 3rem); color: var(--cream); margin-bottom: 12px; }
+    .newsletter-cta p { font-size: 1rem; color: rgba(248,244,237,0.72); max-width: 480px; margin: 0 auto 40px; line-height: 1.75; }
+    .newsletter-cta-form {
+      display: flex;
+      max-width: 480px;
+      margin: 0 auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(44,37,34,0.2);
+    }
+    .newsletter-cta-input {
+      flex: 1;
+      background: var(--cream);
+      border: none;
+      padding: 16px 20px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      outline: none;
+    }
+    .newsletter-cta-input::placeholder { color: var(--charcoal-xs); }
+    .newsletter-cta-btn {
+      background: var(--charcoal);
+      color: var(--cream);
+      border: none;
+      padding: 16px 28px;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--transition);
+      white-space: nowrap;
+    }
+    .newsletter-cta-btn:hover { background: var(--teal-dark); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .shop-grid { grid-template-columns: repeat(3, 1fr); }
+      .artist-deep-inner { gap: 60px; }
+      .about-inner { gap: 60px; }
+      .contact-inner { gap: 60px; }
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { height: 60vw; }
+      .hero-left { padding: 64px 22px; }
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-portrait { max-width: 420px; }
+      .hybrid-top { grid-template-columns: 1fr; gap: 32px; }
+      .hybrid-top-right p { margin-left: 0; }
+      .hybrid-steps { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid .art-card:first-child { grid-column: 1 / 3; }
+      .gallery-grid-bottom { grid-template-columns: 1fr 1fr; }
+      .gallery-grid-bottom .art-card:last-child { grid-column: 1 / 3; }
+      .shop-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-strip { flex-wrap: wrap; }
+      .trust-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(44,37,34,0.08); }
+      .exhibition-cta-bar { flex-direction: column; text-align: center; }
+      .artist-deep-inner { grid-template-columns: 1fr; gap: 52px; }
+      .journal-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 52px; }
+    }
+    @media (max-width: 600px) {
+      .shop-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 28px; }
+      .form-row { grid-template-columns: 1fr; }
+      .exhibition-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .exhibition-header p { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">The Sophia <em>Studios</em></a>
+    <ul class="nav-links">
+      <li><a href="work.html">The Work</a></li>
+      <li><a href="index.html#hybrid">The Experience</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="work.html">The Work</a>
+  <a href="index.html#hybrid">The Experience</a>
+  <a href="shop.html">Shop</a>
+  <a href="journal.html">Journal</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Based in New York City · Exhibiting Globally</p>
+    <h1 class="hero-title">Juliana<br>Sophia</h1>
+    <p class="hero-title-studio">The Sophia Studios</p>
+    <p class="hero-desc">Paintings rooted in a life of global travel — from French harbors to Asian markets to New York light. Live exhibitions in NYC; immersive virtual galleries bring every show to collectors everywhere. Abstract and representational, her work maps the chapters of a life in motion.</p>
+    <div class="hero-btns">
+      <a href="#hybrid" class="btn btn-dark">Enter the Virtual Gallery ↗</a>
+      <a href="shop.html" class="btn btn-outline">Browse the Collection</a>
+      <a href="#journal" class="btn btn-ghost">▶ Watch the Process</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Exhibitions</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div>
+        <div class="stat-num">40+</div>
+        <div class="stat-label">Works Available</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-label">Countries</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-mosaic">
+      <!-- Feature: Cat & Blue Door -->
+      <div class="mosaic-cell mosaic-feature">
+        <svg viewBox="0 0 500 760" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="500" height="760" fill="#d4938a"/>
+          <!-- Pink wall left -->
+          <rect width="240" height="760" fill="#d4938a"/>
+          <!-- Teal door frame -->
+          <rect x="220" width="280" height="760" fill="#6badb8"/>
+          <!-- Window with garden behind -->
+          <rect x="238" y="25" width="248" height="420" fill="#7abcc5"/>
+          <rect x="238" y="25" width="248" height="420" fill="rgba(60,110,55,0.25)"/>
+          <!-- Window panes -->
+          <line x1="362" y1="25" x2="362" y2="445" stroke="rgba(255,255,255,0.4)" stroke-width="6"/>
+          <line x1="238" y1="235" x2="486" y2="235" stroke="rgba(255,255,255,0.4)" stroke-width="6"/>
+          <!-- Greenery through glass -->
+          <ellipse cx="300" cy="120" rx="50" ry="60" fill="rgba(60,130,55,0.35)"/>
+          <ellipse cx="430" cy="140" rx="55" ry="65" fill="rgba(50,120,45,0.3)"/>
+          <ellipse cx="360" cy="80" rx="40" ry="50" fill="rgba(70,140,60,0.25)"/>
+          <!-- Door handle -->
+          <circle cx="234" cy="360" r="11" fill="#c8a830"/>
+          <!-- Cat flap -->
+          <rect x="262" y="490" width="68" height="55" rx="4" fill="#d0c8b0" stroke="rgba(44,37,34,0.15)" stroke-width="2"/>
+          <!-- Wall texture hints -->
+          <rect x="30" y="60" width="160" height="4" rx="2" fill="rgba(44,37,34,0.06)"/>
+          <rect x="15" y="120" width="185" height="4" rx="2" fill="rgba(44,37,34,0.04)"/>
+          <rect x="40" y="180" width="150" height="4" rx="2" fill="rgba(44,37,34,0.05)"/>
+          <!-- Plant on wall left -->
+          <circle cx="90" cy="180" r="28" fill="#5a9050" opacity="0.8"/>
+          <rect x="82" y="200" width="16" height="30" rx="4" fill="#8a6840"/>
+          <!-- Brick floor -->
+          <rect y="590" width="500" height="170" fill="#9a7055"/>
+          <rect y="595" x="0" width="84" height="34" fill="#a07858" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="595" x="84" width="84" height="34" fill="#956d52" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="595" x="168" width="84" height="34" fill="#a07858" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="595" x="252" width="84" height="34" fill="#956d52" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="595" x="336" width="84" height="34" fill="#a07858" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="595" x="420" width="80" height="34" fill="#956d52" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="629" x="42" width="84" height="34" fill="#956d52" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="629" x="126" width="84" height="34" fill="#a07858" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="629" x="210" width="84" height="34" fill="#956d52" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="629" x="294" width="84" height="34" fill="#a07858" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <rect y="629" x="378" width="84" height="34" fill="#956d52" stroke="rgba(44,37,34,0.12)" stroke-width="1"/>
+          <!-- Watering can -->
+          <rect x="55" y="530" width="95" height="74" rx="10" fill="#b0b0b0"/>
+          <ellipse cx="102" cy="532" rx="47" ry="15" fill="#c0c0c0"/>
+          <rect x="145" y="545" width="52" height="8" rx="4" fill="#a8a8a8"/>
+          <circle cx="72" cy="570" r="14" fill="rgba(255,255,255,0.15)"/>
+          <!-- Cat -->
+          <ellipse cx="295" cy="625" rx="92" ry="58" fill="#ece7e0"/>
+          <circle cx="295" cy="556" r="52" fill="#e0dbd4"/>
+          <!-- Face markings -->
+          <ellipse cx="276" cy="548" rx="18" ry="22" fill="#b0a8a0"/>
+          <ellipse cx="314" cy="548" rx="18" ry="22" fill="#b0a8a0"/>
+          <!-- Eyes -->
+          <ellipse cx="276" cy="550" rx="9" ry="11" fill="#4a7a6a"/>
+          <ellipse cx="314" cy="550" rx="9" ry="11" fill="#4a7a6a"/>
+          <circle cx="276" cy="550" r="5" fill="#1a1a1a"/>
+          <circle cx="314" cy="550" r="5" fill="#1a1a1a"/>
+          <circle cx="278" cy="548" r="2" fill="rgba(255,255,255,0.6)"/>
+          <circle cx="316" cy="548" r="2" fill="rgba(255,255,255,0.6)"/>
+          <!-- Nose -->
+          <path d="M290 566 L295 572 L300 566 Q295 562 290 566Z" fill="#c08080"/>
+          <!-- Whiskers -->
+          <line x1="240" y1="560" x2="268" y2="566" stroke="rgba(44,37,34,0.3)" stroke-width="1.5"/>
+          <line x1="240" y1="568" x2="268" y2="570" stroke="rgba(44,37,34,0.3)" stroke-width="1.5"/>
+          <line x1="322" y1="566" x2="350" y2="560" stroke="rgba(44,37,34,0.3)" stroke-width="1.5"/>
+          <line x1="322" y1="570" x2="350" y2="568" stroke="rgba(44,37,34,0.3)" stroke-width="1.5"/>
+          <!-- Cat ear fluff -->
+          <polygon points="258,510 245,480 272,500" fill="#e0dbd4"/>
+          <polygon points="332,510 345,480 318,500" fill="#e0dbd4"/>
+        </svg>
+      </div>
+      <!-- Top-right: Sailboats -->
+      <div class="mosaic-cell">
+        <svg viewBox="0 0 400 375" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="375" fill="#7aad9f"/>
+          <rect width="400" height="160" fill="#c5dde0"/>
+          <!-- Clouds -->
+          <ellipse cx="80" cy="45" rx="40" ry="18" fill="rgba(255,255,255,0.7)"/>
+          <ellipse cx="110" cy="38" rx="30" ry="20" fill="rgba(255,255,255,0.65)"/>
+          <ellipse cx="55" cy="48" rx="25" ry="14" fill="rgba(255,255,255,0.6)"/>
+          <ellipse cx="310" cy="55" rx="35" ry="16" fill="rgba(255,255,255,0.5)"/>
+          <!-- Treeline / fortification -->
+          <rect y="135" width="400" height="30" fill="#2d5a27"/>
+          <ellipse cx="60" cy="128" rx="60" ry="38" fill="#3a6b31"/>
+          <ellipse cx="160" cy="122" rx="70" ry="42" fill="#2d5a27"/>
+          <ellipse cx="270" cy="118" rx="75" ry="45" fill="#3d7034"/>
+          <ellipse cx="370" cy="125" rx="55" ry="35" fill="#2d5a27"/>
+          <!-- Stone wall -->
+          <rect y="160" width="400" height="28" fill="#c8b890"/>
+          <rect y="165" width="400" height="20" fill="#bfad82"/>
+          <!-- French flag -->
+          <rect x="188" y="65" width="3.5" height="90" fill="#6a5040"/>
+          <rect x="190" y="65" width="14" height="32" fill="#002395"/>
+          <rect x="204" y="65" width="14" height="32" fill="#EEEEEE"/>
+          <rect x="218" y="65" width="14" height="32" fill="#ED2939"/>
+          <!-- Water -->
+          <rect y="188" width="400" height="187" fill="#6fa89a"/>
+          <!-- Water shimmer lines -->
+          <line x1="0" y1="215" x2="400" y2="220" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+          <line x1="0" y1="248" x2="400" y2="244" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+          <line x1="0" y1="278" x2="400" y2="282" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+          <line x1="0" y1="310" x2="400" y2="308" stroke="rgba(255,255,255,0.09)" stroke-width="1.5"/>
+          <!-- Boat 1 hull + sail -->
+          <ellipse cx="128" cy="317" rx="30" ry="7" fill="#b89060"/>
+          <rect x="117" y="237" width="4" height="78" fill="#6a5040"/>
+          <polygon points="119,240 119,310 155,275" fill="#2a2520"/>
+          <!-- Boat 2 hull + sail -->
+          <ellipse cx="230" cy="312" rx="28" ry="6" fill="#b89060"/>
+          <rect x="220" y="243" width="4" height="68" fill="#6a5040"/>
+          <polygon points="222,246 222,308 256,272" fill="#2a2520"/>
+          <!-- Reflections -->
+          <polygon points="119,320 115,360 153,360" fill="rgba(42,37,32,0.18)"/>
+          <polygon points="220,315 217,352 250,352" fill="rgba(42,37,32,0.15)"/>
+        </svg>
+      </div>
+      <!-- Bottom-right: Eiffel -->
+      <div class="mosaic-cell">
+        <svg viewBox="0 0 400 385" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="385" fill="#4a8a5a"/>
+          <rect width="400" height="140" fill="#b8d8e5"/>
+          <!-- Eiffel tower -->
+          <polygon points="190,0 170,385 230,385 210,0" fill="#9a7860" opacity="0.8"/>
+          <polygon points="193,0 178,270 222,270 207,0" fill="#a88870"/>
+          <!-- Tower cross beams -->
+          <rect x="172" y="70" width="56" height="9" fill="#8a6850" opacity="0.85"/>
+          <rect x="169" y="130" width="62" height="9" fill="#8a6850" opacity="0.85"/>
+          <rect x="167" y="195" width="66" height="9" fill="#8a6850" opacity="0.8"/>
+          <!-- Arch detail at base -->
+          <path d="M167,260 Q190,235 213,260" stroke="#8a6850" stroke-width="4" fill="none" opacity="0.7"/>
+          <!-- Greenery left -->
+          <ellipse cx="65" cy="280" rx="105" ry="140" fill="#2a6030"/>
+          <ellipse cx="30" cy="310" rx="80" ry="110" fill="#357038"/>
+          <ellipse cx="90" cy="260" rx="75" ry="95" fill="#3a7a40"/>
+          <!-- Greenery right -->
+          <ellipse cx="345" cy="270" rx="110" ry="145" fill="#2a6030"/>
+          <ellipse cx="380" cy="300" rx="85" ry="115" fill="#357038"/>
+          <ellipse cx="320" cy="255" rx="70" ry="90" fill="#3a7a40"/>
+          <!-- Red roses -->
+          <circle cx="300" cy="295" r="9" fill="#c84040"/>
+          <circle cx="322" cy="312" r="8" fill="#b83030"/>
+          <circle cx="285" cy="308" r="7" fill="#d04848"/>
+          <circle cx="342" cy="298" r="9" fill="#c84040"/>
+          <circle cx="312" cy="328" r="7" fill="#b83030"/>
+          <circle cx="270" cy="320" r="8" fill="#c84040"/>
+          <!-- Sandy path -->
+          <polygon points="148,385 252,385 234,200 166,200" fill="#d4b870" opacity="0.62"/>
+          <!-- Iron fence -->
+          <line x1="90" y1="265" x2="165" y2="252" stroke="#1a1a1a" stroke-width="2.5"/>
+          <line x1="90" y1="275" x2="165" y2="262" stroke="#1a1a1a" stroke-width="1.5"/>
+          <line x1="92" y1="265" x2="92" y2="300" stroke="#1a1a1a" stroke-width="2"/>
+          <line x1="110" y1="262" x2="110" y2="296" stroke="#1a1a1a" stroke-width="2"/>
+          <line x1="128" y1="258" x2="128" y2="292" stroke="#1a1a1a" stroke-width="2"/>
+          <line x1="146" y1="255" x2="146" y2="289" stroke="#1a1a1a" stroke-width="2"/>
+          <!-- Poodle -->
+          <ellipse cx="152" cy="312" rx="26" ry="16" fill="#1a1a1a"/>
+          <circle cx="155" cy="293" r="15" fill="#1a1a1a"/>
+          <circle cx="165" cy="287" r="10" fill="#1a1a1a"/>
+          <rect x="136" y="324" width="7" height="24" rx="3" fill="#1a1a1a"/>
+          <rect x="149" y="326" width="7" height="22" rx="3" fill="#1a1a1a"/>
+          <rect x="162" y="324" width="7" height="24" rx="3" fill="#1a1a1a"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Live badge -->
+    <div class="hero-live-badge">
+      <div class="live-dot"></div>
+      <div class="live-text">
+        <strong>Now Showing: Paris &amp; Beyond</strong>
+        <span>Virtual Gallery Open — Enter Free</span>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Physical Pop-Up Exhibitions<span class="dot">·</span></span>
+    <span class="marquee-item">Immersive Virtual Galleries<span class="dot">·</span></span>
+    <span class="marquee-item">Collectible Prints &amp; Originals<span class="dot">·</span></span>
+    <span class="marquee-item">New York City<span class="dot">·</span></span>
+    <span class="marquee-item">Mixed Media &amp; Abstract<span class="dot">·</span></span>
+    <span class="marquee-item">Global Travel Series<span class="dot">·</span></span>
+    <span class="marquee-item">Life Stages Collection<span class="dot">·</span></span>
+    <span class="marquee-item">Certificate of Authenticity<span class="dot">·</span></span>
+    <span class="marquee-item">Physical Pop-Up Exhibitions<span class="dot">·</span></span>
+    <span class="marquee-item">Immersive Virtual Galleries<span class="dot">·</span></span>
+    <span class="marquee-item">Collectible Prints &amp; Originals<span class="dot">·</span></span>
+    <span class="marquee-item">New York City<span class="dot">·</span></span>
+    <span class="marquee-item">Mixed Media &amp; Abstract<span class="dot">·</span></span>
+    <span class="marquee-item">Global Travel Series<span class="dot">·</span></span>
+    <span class="marquee-item">Life Stages Collection<span class="dot">·</span></span>
+    <span class="marquee-item">Certificate of Authenticity<span class="dot">·</span></span>
+  </div>
+</div>
+
+<!-- ═══ ABOUT STRIP ═══ -->
+<section class="about-strip">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-portrait reveal">
+        <div class="about-portrait-frame">
+          <!-- Artist in studio SVG -->
+          <svg viewBox="0 0 480 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="480" height="600" fill="#f0e8dc"/>
+            <!-- Warm studio background -->
+            <rect width="480" height="600" fill="#ede0cc"/>
+            <!-- Studio window -->
+            <rect x="300" y="0" width="180" height="320" fill="rgba(255,230,160,0.4)"/>
+            <line x1="390" y1="0" x2="390" y2="320" stroke="rgba(200,175,130,0.45)" stroke-width="5"/>
+            <line x1="300" y1="160" x2="480" y2="160" stroke="rgba(200,175,130,0.45)" stroke-width="5"/>
+            <!-- Warm light on floor -->
+            <ellipse cx="390" cy="480" rx="160" ry="60" fill="rgba(255,220,140,0.2)"/>
+            <!-- Easel and canvas -->
+            <rect x="150" y="80" width="180" height="240" fill="#f8f4ed" stroke="#8a6a48" stroke-width="3"/>
+            <rect x="162" y="92" width="156" height="216" fill="#7aad9f" opacity="0.65"/>
+            <!-- Painting on canvas -->
+            <ellipse cx="210" cy="185" rx="55" ry="65" fill="#2a6030" opacity="0.6"/>
+            <ellipse cx="260" cy="165" rx="45" ry="55" fill="#357038" opacity="0.5"/>
+            <circle cx="230" cy="200" r="8" fill="#c84040" opacity="0.8"/>
+            <circle cx="255" cy="215" r="7" fill="#c84040" opacity="0.7"/>
+            <!-- Easel legs -->
+            <line x1="150" y1="320" x2="105" y2="560" stroke="#7a5a38" stroke-width="7" stroke-linecap="round"/>
+            <line x1="330" y1="320" x2="375" y2="560" stroke="#7a5a38" stroke-width="7" stroke-linecap="round"/>
+            <line x1="240" y1="320" x2="240" y2="560" stroke="#7a5a38" stroke-width="6" stroke-linecap="round"/>
+            <!-- Palette -->
+            <ellipse cx="400" cy="340" rx="55" ry="38" fill="#c8b898" transform="rotate(-15 400 340)"/>
+            <circle cx="382" cy="328" r="9" fill="#C17A5D"/>
+            <circle cx="404" cy="320" r="9" fill="#5B8C8C"/>
+            <circle cx="424" cy="330" r="9" fill="#2C2522"/>
+            <circle cx="390" cy="346" r="7" fill="#8B6BA0"/>
+            <circle cx="412" cy="350" r="7" fill="#c8a830"/>
+            <!-- Brush in hand suggestion -->
+            <line x1="365" y1="200" x2="340" y2="280" stroke="#6a5038" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="338" cy="283" rx="6" ry="10" fill="#5B8C8C" transform="rotate(-20 338 283)"/>
+            <!-- Paint jars -->
+            <rect x="55" y="430" width="30" height="38" rx="4" fill="#5B8C8C" opacity="0.8"/>
+            <rect x="90" y="438" width="28" height="30" rx="4" fill="#C17A5D" opacity="0.8"/>
+            <rect x="124" y="433" width="30" height="35" rx="4" fill="#2C2522" opacity="0.7"/>
+            <!-- Rolled canvases on floor -->
+            <ellipse cx="65" cy="530" rx="12" ry="35" fill="#d4c8a8" transform="rotate(25 65 530)"/>
+            <ellipse cx="95" cy="535" rx="10" ry="30" fill="#c8b898" transform="rotate(15 95 535)"/>
+            <!-- Warm shadow on floor -->
+            <ellipse cx="240" cy="580" rx="110" ry="18" fill="rgba(44,37,34,0.07)"/>
+          </svg>
+        </div>
+        <div class="about-portrait-accent"></div>
+        <div class="about-portrait-caption">
+          <p>Juliana Sophia in her New York City studio, 2024</p>
+        </div>
+      </div>
+
+      <div class="about-content reveal reveal-delay-2">
+        <span class="eyebrow">About the Artist</span>
+        <h2>Art born from<br><em>a life in motion</em></h2>
+        <p class="about-subtitle">Mixed-media painter · Global traveler · New York City</p>
+        <p>Juliana Sophia has spent a lifetime collecting places. Her paintings are equal parts memory and observation — the way light falls differently in a Parisian courtyard than on a New York rooftop, or how the colors of a Kyoto market stay with you long after you've left.</p>
+        <p>Working in oils, acrylics, and mixed media, she moves fluidly between representational landscapes and deeply personal abstract pieces that explore the emotional terrain of her life's different chapters.</p>
+        <div class="about-pills">
+          <span class="pill pill-teal">Oil on Canvas</span>
+          <span class="pill pill-teal">Mixed Media</span>
+          <span class="pill pill-terra">Abstract</span>
+          <span class="pill pill-terra">Landscapes</span>
+          <span class="pill pill-charcoal">Paris Series</span>
+          <span class="pill pill-charcoal">Life Stages</span>
+          <span class="pill pill-charcoal">Interiors</span>
+        </div>
+        <a href="work.html" class="btn btn-dark">Explore the Full Portfolio →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HYBRID EXPERIENCE ═══ -->
+<section class="hybrid" id="hybrid">
+  <div class="container">
+    <div class="hybrid-top">
+      <div class="reveal">
+        <span class="eyebrow hybrid-eyebrow">The Hybrid Art Experience</span>
+        <h2>Art that<br>travels<br><em>with you</em></h2>
+      </div>
+      <div class="hybrid-top-right reveal reveal-delay-2">
+        <p>Juliana's exhibitions open in New York City — the creative and operational heart of her practice — then travel digitally to collectors on every continent. What begins as an intimate physical space becomes a permanent virtual destination. No passport required; the experience is the same.</p>
+        <br/>
+        <a href="#" class="btn btn-cream-outline" style="margin-top:8px">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="hybrid-steps reveal">
+      <div class="h-step">
+        <div class="h-num">01</div>
+        <div class="h-icon">🎨</div>
+        <h3>Physical Pop-Up Exhibition</h3>
+        <p>Juliana curates intimate pop-up exhibitions in carefully chosen New York City spaces — converted lofts, private studios, and cultural venues. Each show is a complete sensory experience: textured originals, warm light, and the artist present to share the story behind every piece.</p>
+      </div>
+      <div class="h-step">
+        <div class="h-num">02</div>
+        <div class="h-icon">📸</div>
+        <h3>Professional Capture &amp; Digitization</h3>
+        <p>Every exhibition is professionally photographed and 3D-scanned at the highest resolution — preserving the texture, scale, and atmosphere of the physical space. Each painting is individually documented with close-up detail shots that capture brushstroke and material depth.</p>
+      </div>
+      <div class="h-step">
+        <div class="h-num">03</div>
+        <div class="h-icon">✨</div>
+        <h3>Immersive Virtual Gallery + Seamless Shopping</h3>
+        <p>The digitized exhibition becomes a fully navigable 3D virtual gallery. Walk through the space from anywhere in the world, zoom into individual brushstrokes, read each work's story, and purchase prints or bid on originals — all from within the virtual experience.</p>
+      </div>
+    </div>
+
+    <div class="hybrid-video reveal">
+      <div class="play-ring">▶</div>
+      <p>Paris &amp; Beyond — Exhibition Walkthrough · 2 min</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CURRENT EXHIBITION ═══ -->
+<section class="exhibition" id="work">
+  <div class="container">
+    <div class="exhibition-header reveal">
+      <div>
+        <span class="eyebrow">Current Exhibition</span>
+        <h2>Paris &amp; Beyond</h2>
+      </div>
+      <div>
+        <p>Mixed-media and abstract works drawn from Juliana's time in France — familiar landmarks alongside abstract expressions of memory, movement, and belonging.</p>
+        <a href="work.html" class="btn btn-outline">View Full Portfolio</a>
+      </div>
+    </div>
+
+    <!-- Top row: feature + 2 -->
+    <div class="gallery-grid reveal">
+      <div class="art-card">
+        <svg viewBox="0 0 520 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="520" height="480" fill="#d4938a"/>
+          <rect width="270" height="480" fill="#d4938a"/>
+          <rect x="248" width="272" height="480" fill="#6badb8"/>
+          <rect x="264" y="25" width="242" height="330" fill="#7abcc5"/>
+          <rect x="264" y="25" width="242" height="330" fill="rgba(60,110,55,0.28)"/>
+          <line x1="385" y1="25" x2="385" y2="355" stroke="rgba(255,255,255,0.38)" stroke-width="6"/>
+          <line x1="264" y1="190" x2="506" y2="190" stroke="rgba(255,255,255,0.38)" stroke-width="6"/>
+          <circle cx="255" cy="275" r="13" fill="#c8a830"/>
+          <rect x="292" y="405" width="74" height="58" rx="4" fill="#d0c8b0" stroke="rgba(44,37,34,0.15)" stroke-width="2"/>
+          <rect y="390" width="520" height="90" fill="#9a7055"/>
+          <rect y="392" x="0" width="90" height="36" fill="#a07858" stroke="rgba(44,37,34,0.1)" stroke-width="1"/>
+          <rect y="392" x="90" width="90" height="36" fill="#956d52" stroke="rgba(44,37,34,0.1)" stroke-width="1"/>
+          <rect y="392" x="180" width="90" height="36" fill="#a07858" stroke="rgba(44,37,34,0.1)" stroke-width="1"/>
+          <rect y="392" x="270" width="90" height="36" fill="#956d52" stroke="rgba(44,37,34,0.1)" stroke-width="1"/>
+          <rect y="392" x="360" width="90" height="36" fill="#a07858" stroke="rgba(44,37,34,0.1)" stroke-width="1"/>
+          <rect y="392" x="450" width="70" height="36" fill="#956d52" stroke="rgba(44,37,34,0.1)" stroke-width="1"/>
+          <ellipse cx="330" cy="420" rx="100" ry="55" fill="#ece7e0"/>
+          <circle cx="330" cy="362" r="50" fill="#e0dbd4"/>
+          <ellipse cx="313" cy="355" rx="17" ry="21" fill="#b0a8a0"/>
+          <ellipse cx="347" cy="355" rx="17" ry="21" fill="#b0a8a0"/>
+          <ellipse cx="313" cy="357" rx="9" ry="11" fill="#4a7a6a"/>
+          <ellipse cx="347" cy="357" rx="9" ry="11" fill="#4a7a6a"/>
+          <circle cx="313" cy="357" r="5" fill="#1a1a1a"/>
+          <circle cx="347" cy="357" r="5" fill="#1a1a1a"/>
+          <circle cx="315" cy="355" r="2" fill="rgba(255,255,255,0.55)"/>
+          <circle cx="349" cy="355" r="2" fill="rgba(255,255,255,0.55)"/>
+          <path d="M323 373 L330 380 L337 373 Q330 368 323 373Z" fill="#c08080"/>
+          <ellipse cx="70" cy="340" rx="55" ry="42" fill="#b0b0b0"/>
+          <rect x="28" y="300" width="84" height="68" rx="9" fill="#aaaaaa"/>
+          <ellipse cx="70" cy="302" rx="42" ry="13" fill="#bbbbbb"/>
+          <rect x="108" y="318" width="48" height="8" rx="4" fill="#a8a8a8"/>
+        </svg>
+        <div class="art-card-overlay">
+          <h4>Le Chat de la Porte Bleue</h4>
+          <p class="meta">Mixed media · 2024 · Paris Series</p>
+          <p class="price">Prints from $150 · Original: Bid from $2,400</p>
+        </div>
+        <span class="art-tag">Fan Favourite</span>
+      </div>
+
+      <div class="art-card">
+        <svg viewBox="0 0 360 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="360" height="480" fill="#6fa89a"/>
+          <rect width="360" height="180" fill="#c5dde0"/>
+          <ellipse cx="90" cy="155" rx="66" ry="40" fill="#3a6b31"/>
+          <ellipse cx="210" cy="148" rx="76" ry="44" fill="#2d5a27"/>
+          <ellipse cx="320" cy="152" rx="60" ry="38" fill="#3d7034"/>
+          <rect y="178" width="360" height="26" fill="#c8b890"/>
+          <rect x="165" y="80" width="3.5" height="86" fill="#6a5040"/>
+          <rect x="168" y="80" width="13" height="28" fill="#002395"/>
+          <rect x="181" y="80" width="13" height="28" fill="#EEE"/>
+          <rect x="194" y="80" width="13" height="28" fill="#ED2939"/>
+          <rect y="200" width="360" height="280" fill="#6fa89a"/>
+          <line x1="0" y1="240" x2="360" y2="246" stroke="rgba(255,255,255,0.13)" stroke-width="2"/>
+          <line x1="0" y1="280" x2="360" y2="276" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+          <line x1="0" y1="320" x2="360" y2="324" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+          <ellipse cx="115" cy="382" rx="28" ry="7" fill="#b89060"/>
+          <rect x="105" y="308" width="4" height="72" fill="#6a5040"/>
+          <polygon points="107,312 107,377 140,345" fill="#2a2520"/>
+          <ellipse cx="218" cy="377" rx="26" ry="6.5" fill="#b89060"/>
+          <rect x="209" y="316" width="4" height="60" fill="#6a5040"/>
+          <polygon points="211,319 211,373 242,346" fill="#2a2520"/>
+          <polygon points="107,388 103,430 135,430" fill="rgba(42,37,32,0.16)"/>
+          <polygon points="209,382 206,422 236,422" fill="rgba(42,37,32,0.14)"/>
+        </svg>
+        <div class="art-card-overlay">
+          <h4>Deux Voiles, Saint-Martin</h4>
+          <p class="meta">Oil on paper · 2024 · Paris Series</p>
+          <p class="price">Prints from $120 · Original: Bid from $1,800</p>
+        </div>
+        <span class="art-tag" style="background:var(--teal)">New</span>
+      </div>
+
+      <div class="art-card">
+        <svg viewBox="0 0 360 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- Abstract: Life Stages I -->
+          <rect width="360" height="480" fill="#F2E8D8"/>
+          <!-- Abstract layers -->
+          <rect width="360" height="480" fill="#EDE0CA"/>
+          <!-- Abstract color blocks -->
+          <rect x="0" y="0" width="180" height="240" fill="#c5dde0" opacity="0.6"/>
+          <rect x="180" y="240" width="180" height="240" fill="#d4938a" opacity="0.5"/>
+          <ellipse cx="180" cy="240" rx="130" ry="130" fill="rgba(91,140,140,0.25)"/>
+          <ellipse cx="80" cy="360" rx="90" ry="75" fill="rgba(193,122,93,0.3)"/>
+          <ellipse cx="300" cy="100" rx="85" ry="70" fill="rgba(91,140,140,0.2)"/>
+          <!-- Gestural marks -->
+          <path d="M40 200 Q120 150 200 220 Q280 290 340 240" stroke="#2C2522" stroke-width="3" fill="none" opacity="0.35"/>
+          <path d="M20 350 Q100 300 180 360 Q260 420 360 380" stroke="#5B8C8C" stroke-width="4" fill="none" opacity="0.45"/>
+          <path d="M60 80 Q140 40 220 100 Q300 160 340 120" stroke="#C17A5D" stroke-width="2.5" fill="none" opacity="0.4"/>
+          <!-- Color splotches -->
+          <circle cx="90" cy="140" r="35" fill="rgba(91,140,140,0.3)"/>
+          <circle cx="270" cy="330" r="40" fill="rgba(193,122,93,0.25)"/>
+          <circle cx="180" cy="240" r="28" fill="rgba(44,37,34,0.12)"/>
+          <!-- Texture marks -->
+          <rect x="150" y="100" width="3" height="40" rx="1.5" fill="rgba(44,37,34,0.25)" transform="rotate(-20 150 100)"/>
+          <rect x="200" y="320" width="3" height="50" rx="1.5" fill="rgba(91,140,140,0.45)" transform="rotate(15 200 320)"/>
+          <rect x="100" y="260" width="2.5" height="35" rx="1.25" fill="rgba(193,122,93,0.5)" transform="rotate(-35 100 260)"/>
+          <!-- Light wash -->
+          <rect x="120" y="0" width="120" height="480" fill="rgba(255,240,210,0.15)"/>
+        </svg>
+        <div class="art-card-overlay">
+          <h4>Life Stages I — Becoming</h4>
+          <p class="meta">Abstract · Mixed media · 2024</p>
+          <p class="price">Prints from $185 · Original: Bid from $3,800</p>
+        </div>
+        <span class="art-tag" style="background:var(--charcoal)">Abstract</span>
+      </div>
+    </div>
+
+    <!-- Bottom row -->
+    <div class="gallery-grid-bottom reveal">
+      <div class="art-card">
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- Abstract: Life Stages II -->
+          <rect width="360" height="320" fill="#e8d5c0"/>
+          <rect x="0" y="0" width="360" height="160" fill="rgba(91,140,140,0.2)"/>
+          <rect x="0" y="160" width="360" height="160" fill="rgba(193,122,93,0.18)"/>
+          <path d="M0 160 Q90 130 180 160 Q270 190 360 160" stroke="rgba(44,37,34,0.3)" stroke-width="3" fill="rgba(44,37,34,0.05)"/>
+          <circle cx="130" cy="100" r="60" fill="rgba(248,244,237,0.4)" stroke="rgba(91,140,140,0.4)" stroke-width="2"/>
+          <circle cx="240" cy="220" r="55" fill="rgba(44,37,34,0.08)" stroke="rgba(193,122,93,0.35)" stroke-width="2"/>
+          <path d="M0,80 Q60,60 120,90 T240,80 T360,100" stroke="#5B8C8C" stroke-width="3.5" fill="none" opacity="0.5"/>
+          <path d="M0,240 Q80,220 160,250 T320,235 T360,250" stroke="#C17A5D" stroke-width="3" fill="none" opacity="0.45"/>
+          <rect x="160" y="130" width="40" height="60" rx="2" fill="rgba(44,37,34,0.08)" transform="rotate(8 160 130)"/>
+        </svg>
+        <div class="art-card-overlay">
+          <h4>Life Stages II — In Between</h4>
+          <p class="meta">Abstract · Acrylic · 2023</p>
+          <p class="price">Prints from $165 · Original: Bid from $2,900</p>
+        </div>
+        <span class="art-tag" style="background:var(--charcoal)">Abstract</span>
+      </div>
+
+      <div class="art-card">
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- Still life: Teal vase & flowers -->
+          <rect width="360" height="320" fill="#f0e8da"/>
+          <rect x="200" y="0" width="160" height="260" fill="rgba(255,225,150,0.3)"/>
+          <line x1="280" y1="0" x2="280" y2="260" stroke="rgba(200,175,130,0.4)" stroke-width="4"/>
+          <rect x="0" y="240" width="360" height="80" fill="#c8b898"/>
+          <rect x="30" y="240" width="300" height="12" fill="#8a6a48"/>
+          <!-- Teal vase -->
+          <rect x="145" y="135" width="70" height="108" rx="35" fill="#5B8C8C"/>
+          <ellipse cx="180" cy="138" rx="35" ry="10" fill="#6a9d9d"/>
+          <ellipse cx="180" cy="242" rx="30" ry="9" fill="#4a7c7c"/>
+          <!-- Vase shine -->
+          <ellipse cx="165" cy="175" rx="8" ry="22" fill="rgba(255,255,255,0.2)" transform="rotate(-10 165 175)"/>
+          <!-- Flowers -->
+          <circle cx="155" cy="112" r="18" fill="#C17A5D"/>
+          <circle cx="180" cy="98" r="20" fill="#d4885a"/>
+          <circle cx="205" cy="108" r="17" fill="#C17A5D"/>
+          <circle cx="165" cy="88" r="15" fill="#b86a4a"/>
+          <circle cx="195" cy="92" r="14" fill="#e09070"/>
+          <!-- Stems -->
+          <line x1="175" y1="135" x2="158" y2="128" stroke="#4a7830" stroke-width="2.5"/>
+          <line x1="180" y1="135" x2="180" y2="116" stroke="#4a7830" stroke-width="2.5"/>
+          <line x1="185" y1="135" x2="203" y2="124" stroke="#4a7830" stroke-width="2.5"/>
+          <!-- Leaves -->
+          <ellipse cx="148" cy="126" rx="12" ry="7" fill="#5a9040" transform="rotate(-40 148 126)"/>
+          <ellipse cx="213" cy="120" rx="11" ry="6" fill="#5a9040" transform="rotate(35 213 120)"/>
+          <!-- Book / object beside vase -->
+          <rect x="60" y="215" width="65" height="28" rx="2" fill="#6a5a90" transform="rotate(-3 60 215)"/>
+          <rect x="63" y="218" width="62" height="24" rx="1" fill="#7a6aa0" transform="rotate(-3 63 218)"/>
+        </svg>
+        <div class="art-card-overlay">
+          <h4>Still Life with Teal Vase</h4>
+          <p class="meta">Oil on canvas · 2023 · Interiors</p>
+          <p class="price">Prints from $95 · Original: Bid from $1,400</p>
+        </div>
+      </div>
+
+      <div class="art-card">
+        <svg viewBox="0 0 520 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="520" height="320" fill="#4a8a5a"/>
+          <rect width="520" height="138" fill="#b8d8e5"/>
+          <polygon points="238,0 218,320 278,320 258,0" fill="#9a7860" opacity="0.8"/>
+          <polygon points="241,0 226,220 264,220 249,0" fill="#a88870"/>
+          <rect x="220" y="60" width="60" height="8" fill="#8a6850" opacity="0.85"/>
+          <rect x="218" y="108" width="64" height="8" fill="#8a6850" opacity="0.82"/>
+          <ellipse cx="75" cy="230" rx="100" ry="130" fill="#2a6030"/>
+          <ellipse cx="40" cy="255" rx="78" ry="108" fill="#357038"/>
+          <ellipse cx="455" cy="222" rx="105" ry="135" fill="#2a6030"/>
+          <ellipse cx="490" cy="248" rx="82" ry="112" fill="#357038"/>
+          <circle cx="390" cy="240" r="8" fill="#c84040"/>
+          <circle cx="410" cy="256" r="7" fill="#b83030"/>
+          <circle cx="373" cy="252" r="7" fill="#d04848"/>
+          <circle cx="430" cy="244" r="8" fill="#c84040"/>
+          <polygon points="196,320 324,320 306,168 214,168" fill="#d4b870" opacity="0.6"/>
+          <ellipse cx="198" cy="268" rx="27" ry="16" fill="#1a1a1a"/>
+          <circle cx="201" cy="249" r="15" fill="#1a1a1a"/>
+          <circle cx="211" cy="243" r="10" fill="#1a1a1a"/>
+          <rect x="183" y="280" width="7" height="24" rx="3" fill="#1a1a1a"/>
+          <rect x="195" y="282" width="7" height="22" rx="3" fill="#1a1a1a"/>
+          <rect x="208" y="280" width="7" height="24" rx="3" fill="#1a1a1a"/>
+        </svg>
+        <div class="art-card-overlay">
+          <h4>Champ de Mars, Morning</h4>
+          <p class="meta">Oil on canvas · 2024 · Paris Series</p>
+          <p class="price">Prints from $140 · Original: Bid from $3,200</p>
+        </div>
+        <span class="art-tag" style="background:var(--teal)">Original Available</span>
+      </div>
+    </div>
+
+    <div class="exhibition-cta-bar reveal">
+      <div class="exhibition-cta-bar-text">
+        <h3>Experience the Full Virtual Gallery</h3>
+        <p>Walk through Paris &amp; Beyond from wherever you are. Zoom into brushstrokes, read each work's story, and collect what moves you — all from the virtual space.</p>
+      </div>
+      <a href="#" class="btn btn-teal" style="font-size:0.88rem;padding:18px 36px">Enter Virtual Gallery ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SHOP PREVIEW ═══ -->
+<section class="shop-section" id="shop">
+  <div class="container">
+    <div class="shop-header reveal">
+      <div>
+        <span class="eyebrow">The Collection</span>
+        <h2>Collect Juliana's Work</h2>
+      </div>
+      <a href="shop.html" class="btn btn-dark">Shop All Prints &amp; Originals</a>
+    </div>
+
+    <div class="filter-row reveal">
+      <button class="filter-pill active">All</button>
+      <button class="filter-pill">Prints</button>
+      <button class="filter-pill">Originals</button>
+      <button class="filter-pill">Paris Series</button>
+      <button class="filter-pill">Life Stages</button>
+      <button class="filter-pill">Interiors</button>
+      <button class="filter-pill">Under $200</button>
+    </div>
+
+    <div class="shop-grid reveal">
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="400" fill="#6fa89a"/>
+            <rect width="400" height="175" fill="#c5dde0"/>
+            <ellipse cx="100" cy="150" rx="70" ry="40" fill="#3a6b31"/>
+            <ellipse cx="260" cy="143" rx="80" ry="44" fill="#2d5a27"/>
+            <rect y="190" width="400" height="210" fill="#6fa89a"/>
+            <ellipse cx="130" cy="315" rx="26" ry="6.5" fill="#b89060"/>
+            <rect x="121" y="255" width="4" height="58" fill="#6a5040"/>
+            <polygon points="123,258 123,311 152,285" fill="#2a2520"/>
+            <ellipse cx="218" cy="309" rx="24" ry="6" fill="#b89060"/>
+            <rect x="210" y="262" width="4" height="46" fill="#6a5040"/>
+            <polygon points="212,265 212,305 240,285" fill="#2a2520"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h4>Deux Voiles</h4>
+          <p class="product-series">Paris Series · Giclée Print</p>
+          <div class="product-foot">
+            <div class="product-price-block">
+              <p class="product-from">From</p>
+              <p class="product-price">$120</p>
+            </div>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="400" fill="#d4938a"/>
+            <rect x="210" width="190" height="400" fill="#6badb8"/>
+            <rect x="224" y="22" width="168" height="230" fill="#7abcc5"/>
+            <rect x="224" y="22" width="168" height="230" fill="rgba(60,110,55,0.28)"/>
+            <line x1="308" y1="22" x2="308" y2="252" stroke="rgba(255,255,255,0.38)" stroke-width="5"/>
+            <line x1="224" y1="137" x2="392" y2="137" stroke="rgba(255,255,255,0.38)" stroke-width="5"/>
+            <rect y="295" width="400" height="105" fill="#9a7055"/>
+            <ellipse cx="238" cy="320" rx="80" ry="50" fill="#ece7e0"/>
+            <circle cx="238" cy="270" r="44" fill="#e0dbd4"/>
+            <ellipse cx="222" cy="263" rx="16" ry="20" fill="#b0a8a0"/>
+            <ellipse cx="254" cy="263" rx="16" ry="20" fill="#b0a8a0"/>
+            <ellipse cx="222" cy="265" rx="8.5" ry="10" fill="#4a7a6a"/>
+            <ellipse cx="254" cy="265" rx="8.5" ry="10" fill="#4a7a6a"/>
+            <circle cx="222" cy="265" r="4.5" fill="#1a1a1a"/>
+            <circle cx="254" cy="265" r="4.5" fill="#1a1a1a"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h4>La Porte Bleue</h4>
+          <p class="product-series">Paris Series · Giclée Print</p>
+          <div class="product-foot">
+            <div class="product-price-block">
+              <p class="product-from">From</p>
+              <p class="product-price">$150</p>
+            </div>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="400" fill="#e8d5c0"/>
+            <rect x="0" y="0" width="200" height="200" fill="rgba(91,140,140,0.22)"/>
+            <rect x="200" y="200" width="200" height="200" fill="rgba(193,122,93,0.2)"/>
+            <ellipse cx="200" cy="200" rx="140" ry="140" fill="rgba(91,140,140,0.18)"/>
+            <path d="M30 190 Q110 145 200 200 Q290 255 370 205" stroke="#2C2522" stroke-width="3" fill="none" opacity="0.3"/>
+            <path d="M15 320 Q100 275 200 320 Q300 365 385 330" stroke="#5B8C8C" stroke-width="4" fill="none" opacity="0.42"/>
+            <circle cx="110" cy="125" r="38" fill="rgba(91,140,140,0.28)"/>
+            <circle cx="290" cy="295" r="42" fill="rgba(193,122,93,0.22)"/>
+            <path d="M40,70 Q100,50 160,80 T280,70 T360,90" stroke="#C17A5D" stroke-width="2.5" fill="none" opacity="0.38"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h4>Life Stages I — Becoming</h4>
+          <p class="product-series">Abstract Series · Giclée Print</p>
+          <div class="product-foot">
+            <div class="product-price-block">
+              <p class="product-from">From</p>
+              <p class="product-price">$185</p>
+            </div>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="400" fill="#4a8a5a"/>
+            <rect width="400" height="130" fill="#b8d8e5"/>
+            <polygon points="192,0 174,400 226,400 208,0" fill="#9a7860" opacity="0.8"/>
+            <polygon points="195,0 180,270 220,270 205,0" fill="#a88870"/>
+            <rect x="175" y="62" width="57" height="8" fill="#8a6850" opacity="0.85"/>
+            <rect x="172" y="115" width="63" height="8" fill="#8a6850" opacity="0.82"/>
+            <ellipse cx="72" cy="295" rx="100" ry="130" fill="#2a6030"/>
+            <ellipse cx="340" cy="288" rx="105" ry="135" fill="#2a6030"/>
+            <circle cx="305" cy="295" r="8" fill="#c84040"/>
+            <circle cx="325" cy="310" r="7" fill="#b83030"/>
+            <circle cx="288" cy="306" r="7" fill="#d04848"/>
+            <polygon points="152,400 248,400 232,205 168,205" fill="#d4b870" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h4>Champ de Mars — Original</h4>
+          <p class="product-series">Paris Series · Original Oil</p>
+          <div class="product-foot">
+            <div class="product-price-block">
+              <p class="product-from">Bid from</p>
+              <p class="product-price">$3,200</p>
+            </div>
+            <button class="add-btn add-btn-terra">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-strip reveal">
+      <div class="trust-item"><span class="ti">🖼️</span> Museum-quality giclée prints</div>
+      <div class="trust-item"><span class="ti">📦</span> Insured worldwide shipping</div>
+      <div class="trust-item"><span class="ti">📜</span> Certificate of Authenticity</div>
+      <div class="trust-item"><span class="ti">🔄</span> 30-day return policy</div>
+      <div class="trust-item"><span class="ti">🇺🇸</span> Shipped from New York</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ARTIST DEEP DIVE ═══ -->
+<section class="artist-deep">
+  <div class="container">
+    <div class="artist-deep-inner">
+      <div class="reveal">
+        <span class="eyebrow">The Artist</span>
+        <h2>Juliana<br><em>Sophia</em></h2>
+        <p class="artist-subtitle">Mixed-media painter · New York City</p>
+        <p class="artist-body">Juliana Sophia's practice is grounded in a simple belief: that where you've been shapes what you see. Her canvases carry the residue of decades of travel — French coastlines, Asian street markets, African textiles, Caribbean light — translated through oil, acrylic, pastel, and collage into something new.</p>
+        <p class="artist-body">Alongside her travel-rooted representational work, Juliana creates a parallel body of abstract paintings. These explore the emotional architecture of her life's different stages — the anxiety of beginnings, the strange grief of endings, the unexpected beauty found in between.</p>
+        <div class="artist-quote">
+          <p>"I don't paint places. I paint how places make me feel six months after I've left them."</p>
+          <cite>— Juliana Sophia</cite>
+        </div>
+        <p class="artist-body">Based in New York City, Juliana presents her work through The Sophia Studios' signature hybrid model: intimate physical pop-ups that open in NYC and travel virtually to collectors worldwide.</p>
+        <a href="work.html" class="btn btn-dark" style="margin-top:12px">View the Portfolio →</a>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <span class="eyebrow">Her Journey</span>
+        <ul class="journey-list" style="margin-top: 28px;">
+          <li class="journey-item">
+            <div class="journey-dot">🌍</div>
+            <div class="journey-text">
+              <p class="journey-year">Early Life</p>
+              <p class="journey-title">A childhood shaped by movement</p>
+              <p class="journey-desc">Grew up across multiple continents, developing an early sensitivity to place, color, and the feeling of belonging somewhere temporarily.</p>
+            </div>
+          </li>
+          <li class="journey-item">
+            <div class="journey-dot">🎨</div>
+            <div class="journey-text">
+              <p class="journey-year">Formative Years</p>
+              <p class="journey-title">Finding the studio</p>
+              <p class="journey-desc">Began painting seriously in her twenties, studying color theory and technique while living between Europe and the US. France became a recurring subject and second home.</p>
+            </div>
+          </li>
+          <li class="journey-item">
+            <div class="journey-dot">🗽</div>
+            <div class="journey-text">
+              <p class="journey-year">Present</p>
+              <p class="journey-title">Based in New York City</p>
+              <p class="journey-desc">Now operating from her NYC studio, Juliana exhibits globally through The Sophia Studios' hybrid model, reaching collectors in over 30 countries.</p>
+            </div>
+          </li>
+          <li class="journey-item">
+            <div class="journey-dot active">✨</div>
+            <div class="journey-text">
+              <p class="journey-year">Now Open</p>
+              <p class="journey-title">Paris &amp; Beyond — Current Exhibition</p>
+              <p class="journey-desc">The debut Sophia Studios exhibition. Mixed-media works from France, available now as prints and originals via virtual and in-person viewing.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ JOURNAL ═══ -->
+<section class="journal" id="journal">
+  <div class="container">
+    <span class="eyebrow reveal">From the Studio</span>
+    <h2 style="font-size:clamp(2.2rem,3.5vw,3.2rem);margin-bottom:12px;" class="reveal">Journal</h2>
+    <p style="font-size:0.97rem;color:var(--charcoal-lt);max-width:500px;margin-bottom:56px;" class="reveal">Travel notes, process stories, and reflections on what it means to paint a life — from city to city, chapter to chapter.</p>
+
+    <div class="journal-grid reveal">
+      <div class="journal-feature">
+        <div class="journal-feature-img">
+          <svg viewBox="0 0 700 394" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <!-- Studio scene -->
+            <rect width="700" height="394" fill="#ede0cc"/>
+            <rect x="0" y="0" width="200" height="394" fill="rgba(255,225,150,0.28)"/>
+            <line x1="100" y1="0" x2="100" y2="260" stroke="rgba(200,175,130,0.4)" stroke-width="5"/>
+            <line x1="0" y1="130" x2="200" y2="130" stroke="rgba(200,175,130,0.4)" stroke-width="5"/>
+            <rect x="250" y="40" width="220" height="285" fill="#f8f4ed" stroke="#8a6a48" stroke-width="3"/>
+            <rect x="264" y="53" width="192" height="258" fill="#7aad9f" opacity="0.6"/>
+            <!-- rough painting on canvas -->
+            <ellipse cx="340" cy="162" rx="60" ry="70" fill="#2a6030" opacity="0.5"/>
+            <ellipse cx="390" cy="142" rx="50" ry="58" fill="#357038" opacity="0.45"/>
+            <circle cx="355" cy="185" r="9" fill="#c84040" opacity="0.75"/>
+            <line x1="250" y1="325" x2="200" y2="394" stroke="#7a5a38" stroke-width="7" stroke-linecap="round"/>
+            <line x1="470" y1="325" x2="520" y2="394" stroke="#7a5a38" stroke-width="7" stroke-linecap="round"/>
+            <line x1="360" y1="325" x2="360" y2="394" stroke="#7a5a38" stroke-width="6" stroke-linecap="round"/>
+            <!-- Table with materials -->
+            <rect x="520" y="220" width="160" height="12" fill="#8a6a48"/>
+            <ellipse cx="590" cy="220" rx="55" ry="36" fill="#d4c8a0" transform="rotate(-10 590 220)"/>
+            <circle cx="572" cy="210" r="10" fill="#C17A5D"/>
+            <circle cx="596" cy="202" r="10" fill="#5B8C8C"/>
+            <circle cx="618" cy="210" r="10" fill="#2C2522"/>
+            <circle cx="580" cy="225" r="8" fill="#8B6BA0"/>
+            <rect x="540" y="232" width="6" height="80" rx="3" fill="#7a5a38" transform="rotate(-18 540 232)"/>
+            <rect x="558" y="236" width="6" height="78" rx="3" fill="#7a5a38" transform="rotate(-10 558 236)"/>
+          </svg>
+        </div>
+        <div class="j-tag">Process</div>
+        <h3 class="j-title">How the Paris series came to life — and why black sails felt right</h3>
+        <p class="j-excerpt">I started these paintings after a trip to Île de Ré, working from photographs taken at golden hour. The black sails weren't actually black — they were a deep navy that the late light turned almost charcoal. I kept trying to paint them accurately, and kept failing, until I realized the inaccuracy was the truth...</p>
+        <p class="j-meta">May 28, 2024 · 6 min read</p>
+      </div>
+
+      <div class="journal-stack">
+        <div class="journal-mini">
+          <div class="journal-mini-img">
+            <svg viewBox="0 0 90 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="90" height="80" fill="#d4938a"/>
+              <rect x="46" width="44" height="80" fill="#6badb8"/>
+              <ellipse cx="57" cy="62" rx="30" ry="20" fill="#ece7e0"/>
+              <circle cx="57" cy="43" r="17" fill="#e0dbd4"/>
+            </svg>
+          </div>
+          <div class="journal-mini-body">
+            <p class="j-tag">Exhibitions</p>
+            <h4>Behind the pop-up: finding the right space in NYC</h4>
+            <p class="j-meta">April 12, 2024</p>
+          </div>
+        </div>
+        <div class="journal-mini-sep"></div>
+        <div class="journal-mini">
+          <div class="journal-mini-img">
+            <svg viewBox="0 0 90 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="90" height="80" fill="#4a8a5a"/>
+              <rect width="90" height="35" fill="#b8d8e5"/>
+              <polygon points="42,0 36,80 54,80 48,0" fill="#9a7860" opacity="0.75"/>
+              <ellipse cx="15" cy="65" rx="24" ry="32" fill="#2a6030"/>
+              <ellipse cx="78" cy="62" rx="26" ry="35" fill="#2a6030"/>
+            </svg>
+          </div>
+          <div class="journal-mini-body">
+            <p class="j-tag">Collector Stories</p>
+            <h4>"It lives above our fireplace now" — a collector's letter</h4>
+            <p class="j-meta">March 5, 2024</p>
+          </div>
+        </div>
+        <div class="journal-mini-sep"></div>
+        <div class="journal-mini">
+          <div class="journal-mini-img">
+            <svg viewBox="0 0 90 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="90" height="80" fill="#e8d5c0"/>
+              <rect x="0" y="0" width="45" height="40" fill="rgba(91,140,140,0.2)"/>
+              <rect x="45" y="40" width="45" height="40" fill="rgba(193,122,93,0.18)"/>
+              <ellipse cx="45" cy="40" rx="32" ry="32" fill="rgba(91,140,140,0.15)"/>
+              <path d="M0,38 Q22,28 45,38 T90,38" stroke="#5B8C8C" stroke-width="2.5" fill="none" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="journal-mini-body">
+            <p class="j-tag">Inspiration</p>
+            <h4>The abstract work: painting the chapters I couldn't photograph</h4>
+            <p class="j-meta">February 18, 2024</p>
+          </div>
+        </div>
+        <div class="journal-mini-sep"></div>
+        <a href="journal.html" class="btn btn-outline" style="width:100%;justify-content:center;margin-top:8px;">Read All Journal Posts</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT SECTION ═══ -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2>Let's talk<br>about art</h2>
+        <p>Whether you're interested in commissioning a piece, hosting a pop-up exhibition, licensing artwork, or simply want to know more about the collection — we'd love to hear from you.</p>
+
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <div class="contact-detail-text">
+            <strong>Live Exhibitions</strong>
+            <span>New York City, NY</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-detail-text">
+            <strong>General Inquiries</strong>
+            <span>hello@thesophiastudios.com</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">🖼️</div>
+          <div class="contact-detail-text">
+            <strong>Press &amp; Partnerships</strong>
+            <span>press@thesophiastudios.com</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📦</div>
+          <div class="contact-detail-text">
+            <strong>Shipping &amp; Orders</strong>
+            <span>orders@thesophiastudios.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <form onsubmit="return false;">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" class="form-control" placeholder="Olivia"/>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" class="form-control" placeholder="Bennett"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="olivia@example.com"/>
+          </div>
+          <div class="form-group">
+            <label for="inquiry">Inquiry Type</label>
+            <select id="inquiry" class="form-control">
+              <option value="">Select a topic...</option>
+              <option>Commission a Painting</option>
+              <option>Purchase / Bid on Original</option>
+              <option>Print Order</option>
+              <option>Exhibition / Pop-Up Inquiry</option>
+              <option>Press &amp; Media</option>
+              <option>Partnership / Collaboration</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" class="form-control" placeholder="Tell us a little about what you're looking for..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark form-submit">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NEWSLETTER CTA ═══ -->
+<div class="newsletter-cta">
+  <div class="container">
+    <span class="eyebrow">Stay in the Studio</span>
+    <h2>Early access to new releases<br>and exhibition invitations</h2>
+    <p>Join collectors, curators, and art lovers who receive Juliana's studio letters — process notes, first looks at new work, and invitations to virtual and in-person openings.</p>
+    <div class="newsletter-cta-form">
+      <input type="email" class="newsletter-cta-input" placeholder="your@email.com"/>
+      <button class="newsletter-cta-btn">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">The Sophia <em>Studios</em></div>
+        <p>Mixed-media and abstract paintings rooted in a life of global travel — exhibited live in New York City and virtually, everywhere else.</p>
+        <p class="sub">Live Exhibitions: New York City · Virtual Gallery: Worldwide</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">◈</a>
+          <a href="#" class="social-btn">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="work.html">The Work</a></li>
+          <li><a href="index.html#hybrid">The Experience</a></li>
+          <li><a href="shop.html">Shop Prints</a></li>
+          <li><a href="shop.html">Bid on Originals</a></li>
+          <li><a href="journal.html">Journal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Collect</h5>
+        <ul>
+          <li><a href="shop.html">Giclée Prints</a></li>
+          <li><a href="shop.html">Original Paintings</a></li>
+          <li><a href="#">Bidding Guide</a></li>
+          <li><a href="#">Framing Options</a></li>
+          <li><a href="#">Shipping &amp; Returns</a></li>
+          <li><a href="contact.html">Commissions</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter">
+        <h5>Stay in the Studio</h5>
+        <p>Receive early access to new releases, exhibition invitations, and quiet letters from the studio.</p>
+        <div class="nl-form">
+          <input type="email" class="nl-input" placeholder="your@email.com"/>
+          <button class="nl-btn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 The Sophia Studios. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Shipping &amp; Returns</a>
+        <a href="#" style="color:rgba(248,244,237,0.18)">Built with care by Concept Spaces</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 24));
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('nav-mobile');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navMobile.classList.toggle('open');
+  });
+  // Close on link click
+  navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navMobile.classList.remove('open');
+  }));
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 70);
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => ro.observe(el));
+
+  // Filter pills
+  document.querySelectorAll('.filter-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
